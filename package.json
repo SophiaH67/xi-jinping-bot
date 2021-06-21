@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "@typeit/discord": "^4.0.10",
+    "@types/node": "^15.12.4",
+    "colorts": "^0.1.63",
+    "discord.js": "^12.5.3",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "prettier": "2.3.1"
+  }
+}
