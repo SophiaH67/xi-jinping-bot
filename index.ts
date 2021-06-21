@@ -3,8 +3,6 @@ import { theGreatFirewall } from "./modules/theGreatFirewall"
 
 const bot = new Client()
 
-let modules = []
-
 bot.on('message', (msg) => {
   theGreatFirewall.onMessage(msg)
 })
