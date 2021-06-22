@@ -5,7 +5,7 @@ import { getUser } from './socialCreditScore'
 
 export const socialStatus: Module = {
   onMessage: async (msg) => {
-    if (msg.content.startsWith('xi what is my score?')) {
+    if (msg.content.toLowerCase().startsWith('what is my score?')) {
       const user = await getUser(parseInt(msg.author.id))
       let logEmbed = new MessageEmbed()
         .setColor('#FF0000')
