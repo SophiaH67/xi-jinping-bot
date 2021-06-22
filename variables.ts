@@ -92,4 +92,4 @@ export const bannedWords = [
 ]
 export const fakeThings = ['starvation', 'poverty', 'capitalism']
 export const offensive = ['pooh', '维尼']
-export const positiveThings = ['ccp', 'china', 'xi', 'jinping', 'communism']
+export const positiveThings = ['ccp', 'china', 'xi', 'jinping', 'communism', 'huawei', 'sus']
