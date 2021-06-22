@@ -11,14 +11,14 @@ export const theGreatFirewall: Module = {
     assert(msg.client.user?.id)
     if (msg.author.id === msg.client.user.id) return
     let badWord = bannedWords.find((bad) => msg.content.includes(bad))
-    if (badWord) return censor(msg, `${badWord}不存在!`, 10)
+    if (badWord) return censor(msg, `${badWord}不存在!`, 100)
     let fakeThing = fakeThings.find((fake) => msg.content.includes(fake))
     if (fakeThing)
-      return censor(msg, `${fakeThing}是由外国资本家猪组成的。`, 20)
+      return censor(msg, `${fakeThing}是由外国资本家猪组成的。`, 200)
     let offensiveThing = offensive.find((offense) =>
       msg.content.includes(offense)
     )
-    if (offensiveThing) return censor(msg, 'CCP不赞成你的存在。', 50)
+    if (offensiveThing) return censor(msg, 'CCP不赞成你的存在。', 500)
   },
   startup: (_) => {
     console.log(`[${'FIREWALL'.red}] ${generatePropaganda()}`)
