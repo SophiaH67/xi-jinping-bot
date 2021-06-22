@@ -3,7 +3,7 @@ import assert from 'assert'
 import { socialStatus } from './modules/socialStatus'
 import { positivityEncourager } from './modules/positivityEncourager'
 import { theGreatFirewall } from './modules/theGreatFirewall'
-import { consequences } from 'modules/consequences'
+import { consequences } from './modules/consequences'
 
 const bot = new Client()
 
