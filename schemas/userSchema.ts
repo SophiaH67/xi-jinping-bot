@@ -1,13 +1,32 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose'
 
 export interface Citizen {
   citizenID: Number
+  log: [
+    {
+      change: Number
+      reason: string
+    }
+  ]
   socialCreditScore: Number
 }
 
-const citizenSchema = new Schema<Citizen>({
-  citizenID: { type: Number, required: true},
-  socialCreditScore: Number,
-})
+const citizenSchema = new Schema<Citizen>(
+  {
+    citizenID: { type: Number, required: true },
+    log: [{ change: Number, reason: String }],
+  },
+  {
+    toJSON: { virtuals: true },
+  }
+)
 
-export const userModel = model<Citizen>("user", citizenSchema)
+citizenSchema.virtual('socialCreditScore').get(function (this: Citizen) {
+  let socialCreditScore = 1000
+  for (let i = 0; i < this.log.length; i++) {
+    const log = this.log[i]
+    socialCreditScore = socialCreditScore + (log.change as number)
+  }
+  return socialCreditScore
+})
+export const userModel = model<Citizen>('user', citizenSchema)

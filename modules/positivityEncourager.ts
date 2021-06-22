@@ -28,7 +28,13 @@ export const positivityEncourager: Module = {
       )
       msg.channel.send(`坏公民! ${socialCreditChange}个社会信用`)
     }
-    await updateSocialCreditScore(parseInt(msg.author.id), socialCreditChange)
+    await updateSocialCreditScore(
+      parseInt(msg.author.id),
+      socialCreditChange,
+      `[POSITIVITY] ${
+        socialCreditChange < 0 ? '你对一件好事说了些坏话' : '好公民'
+      }`
+    )
   },
   startup: () => console.log(`[${'POSITIVITY'.green}] Initialized positivity!`),
 }

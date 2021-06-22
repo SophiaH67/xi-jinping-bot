@@ -31,6 +31,10 @@ const censor = async (
   socialCreditHit: number
 ): Promise<any> => {
   console.log(`[${'FIREWALL'.red}] ${reaction}`)
-  updateSocialCreditScore(parseInt(msg.author.id), 0 - socialCreditHit)
+  updateSocialCreditScore(
+    parseInt(msg.author.id),
+    0 - socialCreditHit,
+    `[FIREWALL] ${reaction}`
+  )
   msg.channel.send(`${reaction} 你的社会信用评分下降了${socialCreditHit}分`)
 }

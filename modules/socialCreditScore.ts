@@ -10,7 +10,11 @@ connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
 })
 
-export const updateSocialCreditScore = async (id: number, change: number) => {
+export const updateSocialCreditScore = async (
+  id: number,
+  change: number,
+  reason: string
+) => {
   const citizen = await getUser(id)
   console.log(
     `[${'SCORE'.blue}] ${change < 0 ? 'took' : 'added'} ${
@@ -21,7 +25,10 @@ export const updateSocialCreditScore = async (id: number, change: number) => {
   )
   await userModel.findOneAndUpdate(
     { _id: citizen.id },
-    { $inc: { socialCreditScore: change } }
+    {
+      $inc: { socialCreditScore: change },
+      $push: { log: { change: change, reason: reason } },
+    }
   )
 }
 
@@ -31,7 +38,7 @@ const getUser = async (id: number) => {
   console.log(`[${'SCORE'.blue}] Added untracked user ${id}`)
   const trackedCitizen = await userModel.create({
     citizenID: id,
-    socialCreditScore: 1000,
+    log: [],
   })
   const newCitizen = await trackedCitizen.save()
   return newCitizen
