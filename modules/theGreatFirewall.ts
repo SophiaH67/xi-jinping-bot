@@ -27,9 +27,4 @@ const censor = async (msg: Message, reaction: string, socialCreditHit: number):P
   console.log(`[${'FIREWALL'.red}] ${reaction}`)
   updateSocialCreditScore(parseInt(msg.author.id), 0-socialCreditHit)
   msg.channel.send(`${reaction} 你的社会信用评分下降了${socialCreditHit}分`)
-  try {
-    await msg.delete()
-  } catch (e) {
-    return msg.channel.send("我就像台湾，我没有权利")
-  }
 }
