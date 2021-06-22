@@ -12,7 +12,7 @@ export const positivityEncourager: Module = {
     if (!(await isSentenceAboutPositiveThing(msg.content))) return
     let amountOfPositivity = getAmountOfPositivity(msg.content)
     let socialCreditChange = Math.round(
-      amountOfPositivity * 40 * (Math.random() + 1)
+      (amountOfPositivity * 40 - 10) * (Math.random() + 1)
     )
     if (amountOfPositivity > 0) {
       console.log(
