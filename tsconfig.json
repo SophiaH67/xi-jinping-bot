@@ -2,11 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "commonjs",
-    "lib": [
-      "es6",
-      "es2017",
-      "esnext.asynciterable"
-    ],
+    "lib": ["es6", "es2017", "esnext.asynciterable"],
     "sourceMap": true,
     "moduleResolution": "node",
     "removeComments": true,
@@ -25,7 +21,5 @@
     "resolveJsonModule": true,
     "baseUrl": "."
   },
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

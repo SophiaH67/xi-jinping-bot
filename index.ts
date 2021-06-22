@@ -1,7 +1,7 @@
-import { Client } from "@typeit/discord"
-import assert from "assert"
-import { positivityEncourager } from "./modules/positivityEncourager"
-import { theGreatFirewall } from "./modules/theGreatFirewall"
+import { Client } from '@typeit/discord'
+import assert from 'assert'
+import { positivityEncourager } from './modules/positivityEncourager'
+import { theGreatFirewall } from './modules/theGreatFirewall'
 
 const bot = new Client()
 
