@@ -1,7 +1,9 @@
 import { connect } from 'mongoose'
 import 'colorts/lib/string';
 import { userModel } from '../schemas/userSchema'
+import assert from 'assert';
 
+assert(process.env.MONGO_URI)
 connect(process.env.MONGO_URI, {useFindAndModify: false, useUnifiedTopology: true, useNewUrlParser: true})
 
 export const updateSocialCreditScore = async (id: number, change: number) => {

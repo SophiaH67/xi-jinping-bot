@@ -4,10 +4,12 @@ import 'colorts/lib/string';
 import { generatePropaganda } from './messageGenerator';
 import { bannedWords, fakeThings, offensive } from '../variables';
 import { updateSocialCreditScore } from './socialCreditScore';
+import assert from 'assert';
 
 
 export const theGreatFirewall: Module = {
   onMessage: (msg: Message) => {
+    assert(msg.client.user?.id)
     if (msg.author.id === msg.client.user.id) return
     let badWord = bannedWords.find((bad) => msg.content.includes(bad))
     if (badWord) return censor(msg, `${badWord}不存在!`, 10)
