@@ -3,6 +3,7 @@ import { Module } from '../interfaces/module';
 import 'colorts/lib/string';
 import { generatePropaganda } from './messageGenerator';
 import { bannedWords, fakeThings, offensive } from '../variables';
+import { updateSocialCreditScore } from './socialCreditScore';
 
 
 export const theGreatFirewall: Module = {
@@ -21,11 +22,12 @@ export const theGreatFirewall: Module = {
 }
 
 const censor = async (msg: Message, reaction: string, socialCreditHit: number) => {
+  console.log(`[${'FIREWALL'.red}] ${reaction}`)
+  updateSocialCreditScore(parseInt(msg.author.id), 0-socialCreditHit)
+  msg.channel.send(`${reaction} 你的社会信用评分下降了${socialCreditHit}分`)
   try {
     await msg.delete()
   } catch (e) {
     return msg.channel.send("我就像台湾，我没有权利")
   }
-  console.log(`[${'FIREWALL'.red}] ${reaction}`)
-  msg.channel.send(`${reaction} 你的社会信用评分下降了${socialCreditHit}分`)
 }
