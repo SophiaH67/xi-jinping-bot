@@ -32,7 +32,7 @@ export const updateSocialCreditScore = async (
   )
 }
 
-const getUser = async (id: number) => {
+export const getUser = async (id: number) => {
   const citizen = await userModel.find({ citizenID: id })
   if (citizen[0]) return citizen[0]
   console.log(`[${'SCORE'.blue}] Added untracked user ${id}`)
