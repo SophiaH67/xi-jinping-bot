@@ -7,7 +7,6 @@ import 'colorts/lib/string'
 
 const tokenizer = new WordTokenizer()
 const analyzer = new SentimentAnalyzer('English', PorterStemmer, 'afinn')
-
 export const positivityEncourager: Module = {
   onMessage: async (msg) => {
     if (!(await isSentenceAboutPositiveThing(msg.content))) return
@@ -47,9 +46,9 @@ const getAmountOfPositivity = (sentence: string) =>
 const isSentenceAboutPositiveThing = (sentence: string) => {
   return new Promise((resolve, _reject) => {
     const sentenceCompromise = compromise(sentence)
-    sentenceCompromise.topics().forEach((topic) => {
+    sentenceCompromise.nouns().forEach((noun) => {
       let positiveThing = positiveThings.find((thing) =>
-        topic.text().toLocaleLowerCase().includes(thing)
+        noun.text().toLocaleLowerCase().includes(thing)
       )
       if (positiveThing) resolve(true)
     })
