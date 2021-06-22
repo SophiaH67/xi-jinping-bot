@@ -8,7 +8,7 @@ import assert from 'assert';
 
 
 export const theGreatFirewall: Module = {
-  onMessage: (msg: Message) => {
+  onMessage: (msg: Message): any => {
     assert(msg.client.user?.id)
     if (msg.author.id === msg.client.user.id) return
     let badWord = bannedWords.find((bad) => msg.content.includes(bad))
@@ -23,7 +23,7 @@ export const theGreatFirewall: Module = {
   }
 }
 
-const censor = async (msg: Message, reaction: string, socialCreditHit: number) => {
+const censor = async (msg: Message, reaction: string, socialCreditHit: number):Promise<any> => {
   console.log(`[${'FIREWALL'.red}] ${reaction}`)
   updateSocialCreditScore(parseInt(msg.author.id), 0-socialCreditHit)
   msg.channel.send(`${reaction} 你的社会信用评分下降了${socialCreditHit}分`)
