@@ -92,5 +92,13 @@ export const bannedWords = [
 ]
 export const fakeThings = ['starvation', 'poverty', 'capitalism']
 export const offensive = ['pooh', '维尼']
-export const positiveThings = ['ccp', 'china', 'xi', 'jinping', 'communism', 'huawei', 'sus']
+export const positiveThings = [
+  'ccp',
+  'china',
+  'xi',
+  'jinping',
+  'communis',
+  'huawei',
+  'sus',
+]
 export const owners = process.env.OWNER_IDS?.split(',') || []
