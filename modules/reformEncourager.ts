@@ -53,7 +53,7 @@ export const reformEncourager: Module = {
   },
   startup: (_) => {
     console.log(
-      `[${'REFORM ENCOURAGE'.bgGreen}] Bullying is supported by the CCP`
+      `[${'REFORM ENCOURAGER'.bgGreen}] Bullying is supported by the CCP`
     )
   },
 }
