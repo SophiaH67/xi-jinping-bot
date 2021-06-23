@@ -15,7 +15,9 @@ export const reformEncourager: Module = {
     const targetCitizen = await getUser(parseInt(targetUser.id))
 
     if (authorCitizen.socialCreditScore > targetCitizen.socialCreditScore) {
-      let points = Math.floor(50 * (Math.random() + 1))
+      let points = Math.floor(
+        30 * (Math.random() + 1) * amountOfPositivity * -1
+      )
 
       await Promise.all([
         updateSocialCreditScore(
@@ -33,7 +35,9 @@ export const reformEncourager: Module = {
         ),
       ])
     } else {
-      let points = Math.floor(50 * (Math.random() + 1))
+      let points = Math.floor(
+        30 * (Math.random() + 1) * amountOfPositivity * -1
+      )
 
       await Promise.all([
         updateSocialCreditScore(
