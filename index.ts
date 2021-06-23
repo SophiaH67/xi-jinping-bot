@@ -4,6 +4,7 @@ import { socialStatus } from './modules/socialStatus'
 import { positivityEncourager } from './modules/positivityEncourager'
 import { theGreatFirewall } from './modules/theGreatFirewall'
 import { consequences } from './modules/consequences'
+import { xisBlessing } from './modules/xisBlessing'
 
 const bot = new Client()
 
@@ -12,6 +13,7 @@ bot.on('message', (msg) => {
   positivityEncourager.onMessage(msg)
   socialStatus.onMessage(msg)
   consequences.onMessage(msg)
+  xisBlessing.onMessage(msg)
 })
 
 bot.on('ready', () => {
@@ -19,6 +21,7 @@ bot.on('ready', () => {
   positivityEncourager.startup(bot)
   socialStatus.startup(bot)
   consequences.startup(bot)
+  xisBlessing.startup(bot)
 })
 
 const token = process.env.TOKEN
