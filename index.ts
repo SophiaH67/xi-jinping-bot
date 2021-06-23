@@ -9,6 +9,8 @@ import { xisBlessing } from './modules/xisBlessing'
 const bot = new Client()
 
 bot.on('message', (msg) => {
+  if (!msg.client.user) return
+  if (msg.author.id === msg.client.user.id) return
   theGreatFirewall.onMessage(msg)
   positivityEncourager.onMessage(msg)
   socialStatus.onMessage(msg)
