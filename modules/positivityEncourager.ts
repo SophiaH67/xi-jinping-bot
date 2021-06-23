@@ -40,7 +40,7 @@ export const positivityEncourager: Module = {
   startup: () => console.log(`[${'POSITIVITY'.green}] Initialized positivity!`),
 }
 
-const getAmountOfPositivity = (sentence: string) =>
+export const getAmountOfPositivity = (sentence: string) =>
   analyzer.getSentiment(tokenizer.tokenize(sentence))
 
 const isSentenceAboutPositiveThing = (sentence: string) => {
