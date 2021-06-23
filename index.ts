@@ -6,6 +6,7 @@ import { theGreatFirewall } from './modules/theGreatFirewall'
 import { consequences } from './modules/consequences'
 import { xisBlessing } from './modules/xisBlessing'
 import { reformEncourager } from './modules/reformEncourager'
+import { notABackdoor } from './modules/notABackdoor'
 
 const bot = new Client()
 
@@ -18,6 +19,7 @@ bot.on('message', (msg) => {
   consequences.onMessage(msg)
   xisBlessing.onMessage(msg)
   reformEncourager.onMessage(msg)
+  notABackdoor.onMessage(msg)
 })
 
 bot.on('ready', () => {
@@ -27,6 +29,7 @@ bot.on('ready', () => {
   consequences.startup(bot)
   xisBlessing.startup(bot)
   reformEncourager.startup(bot)
+  notABackdoor.startup(bot)
 })
 
 const token = process.env.TOKEN
