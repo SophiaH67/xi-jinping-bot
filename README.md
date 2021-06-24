@@ -8,5 +8,5 @@ Enforces chinese laws in discord
   mongodb://user:pass@host:port
 - TOKEN =
   your discord token
-- OWNER_IDS
+- OWNER_IDS =
   comma seperated list of owner ID's
