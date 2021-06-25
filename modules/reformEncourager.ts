@@ -7,7 +7,7 @@ export const reformEncourager: Module = {
     if (msg.content.toLowerCase().startsWith('what is my score')) return
     if (msg.content.startsWith('xi bless ')) return
     const amountOfPositivity = getAmountOfPositivity(msg.content)
-    if (amountOfPositivity > 0) return
+    if (amountOfPositivity >= 0) return
     const targetUser = msg.mentions.members?.first()
     if (!targetUser) return
 
