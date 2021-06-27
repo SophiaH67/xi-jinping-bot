@@ -12,6 +12,8 @@ export const reformEncourager: Module = {
     const targetUser = await getTarget(msg)
     if (!targetUser) return
 
+    if (msg.author.id === targetUser.id) return
+
     const authorCitizen = await getUser(parseInt(msg.author.id))
     const targetCitizen = await getUser(parseInt(targetUser.id))
 
