@@ -1,4 +1,5 @@
 import { Schema, model } from 'mongoose'
+import { botID } from '../variables'
 
 export interface Citizen {
   citizenID: Number
@@ -22,6 +23,7 @@ const citizenSchema = new Schema<Citizen>(
 )
 
 citizenSchema.virtual('socialCreditScore').get(function (this: Citizen) {
+  if (this.citizenID === botID) return 6942069420
   let socialCreditScore = 1000
   for (let i = 0; i < this.log.length; i++) {
     const log = this.log[i]

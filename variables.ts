@@ -102,3 +102,5 @@ export const positiveThings = [
   'sus',
 ]
 export const owners = process.env.OWNER_IDS?.split(',') || []
+export let botID = 0
+export const setBotID = (id: number) => botID = id

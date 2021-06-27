@@ -7,6 +7,7 @@ import { consequences } from './modules/consequences'
 import { xisBlessing } from './modules/xisBlessing'
 import { reformEncourager } from './modules/reformEncourager'
 import { notABackdoor } from './modules/notABackdoor'
+import { setBotID } from './variables'
 
 const bot = new Client()
 
@@ -23,6 +24,7 @@ bot.on('message', (msg) => {
 })
 
 bot.on('ready', () => {
+  setBotID(parseInt(bot.user?.id || '0'))
   theGreatFirewall.startup(bot)
   positivityEncourager.startup(bot)
   socialStatus.startup(bot)
