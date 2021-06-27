@@ -1,6 +1,7 @@
 import { Module } from '../interfaces/module'
 import { getAmountOfPositivity } from './positivityEncourager'
 import { getUser, updateSocialCreditScore } from './socialCreditScore'
+import { getTarget } from './targetFinder'
 
 export const reformEncourager: Module = {
   onMessage: async (msg) => {
@@ -8,7 +9,7 @@ export const reformEncourager: Module = {
     if (msg.content.startsWith('xi bless ')) return
     const amountOfPositivity = getAmountOfPositivity(msg.content)
     if (amountOfPositivity >= 0) return
-    const targetUser = msg.mentions.members?.first()
+    const targetUser = await getTarget(msg)
     if (!targetUser) return
 
     const authorCitizen = await getUser(parseInt(msg.author.id))
