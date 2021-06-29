@@ -90,7 +90,7 @@ export const bannedWords = [
   '李洪志',
   '劉曉波动态网自由门',
 ]
-export const fakeThings = ['starvation', 'poverty', 'capitalism']
+export const fakeThings = ['starvation', 'poverty', 'capitalism', 'uighur', 'camps', 'slave']
 export const offensive = ['winnie', 'pooh', '维尼']
 export const positiveThings = [
   'ccp',
