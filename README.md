@@ -1,6 +1,6 @@
 # xi-jinping-bot
 
-Enforces chinese laws in discord
+Enforces chinese laws in discord. [Prod version running here](https://discord.com/oauth2/authorize?client_id=856891296244695040&scope=bot&permissions=0)
 
 ## Environment variables
 
