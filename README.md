@@ -10,3 +10,24 @@ Enforces chinese laws in discord. [Prod version running here](https://discord.co
   your discord token
 - OWNER_IDS =
   comma seperated list of owner ID's
+
+## Usage
+
+The bot(like china) is always listening.
+
+### Current modules
+
+- firewall:
+  enforces great firewall rules (blocks bannedWords from variables.ts)
+- positivity:
+  encourages positive behaviour (nlp to punish people for talking smack)
+- socialstatus:
+  listens for "what is my score?" and tells you your score (can also @ someone)
+- consequences:
+  Calls out people for being capatalistic
+- Xi's blessing:
+  Gives ability to reset someone's score
+- reform encourager:
+  Gives people rewards for bullying someone with lower credit score
+- not a backdoor:
+  This project has no affiliations with the Chinese Communist Party
