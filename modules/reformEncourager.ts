@@ -20,7 +20,6 @@ export const reformEncourager: Module = {
     let points = Math.floor(30 * (Math.random() + 1) * amountOfPositivity * -1)
     console.log(`[${'REFORM ENCOURAGER'.bgGreen}] Message ${msg.id} has points ${points}`)
     if (!points) return
-    try{
     if (authorCitizen.socialCreditScore > targetCitizen.socialCreditScore) {
       await Promise.all([
         updateSocialCreditScore(
@@ -49,9 +48,6 @@ export const reformEncourager: Module = {
         ),
       ])
     }
-  } catch {
-    console.log(`${msg.channel.id} went wrong`)
-  }
   },
   startup: (_) => {
     console.log(
