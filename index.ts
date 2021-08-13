@@ -34,6 +34,10 @@ bot.on('ready', () => {
   notABackdoor.startup(bot)
 })
 
+process.on('unhandledRejection', error => {
+	console.error('Unhandled promise rejection:', error);
+});
+
 const token = process.env.TOKEN
 assert(token)
 bot.login(token)
