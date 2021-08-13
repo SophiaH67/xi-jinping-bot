@@ -3,6 +3,7 @@ import 'colorts/lib/string'
 import { generatePropaganda } from './messageGenerator'
 import { owners } from '../variables'
 import { getUser, updateSocialCreditScore } from './socialCreditScore'
+import { sendMessage } from './messageSender'
 
 export const xisBlessing: Module = {
   onMessage: async (msg) => {
@@ -15,7 +16,7 @@ export const xisBlessing: Module = {
       0 - (citizen.socialCreditScore as number) + 1000,
       '伟大的霸主习近平保佑你的灵魂'
     )
-    msg.channel.send('伟大的霸主习近平保佑你的灵魂')
+    sendMessage(msg.channel, '伟大的霸主习近平保佑你的灵魂')
   },
   startup: () => {
     console.log(

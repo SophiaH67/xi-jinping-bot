@@ -4,6 +4,7 @@ import 'colorts/lib/string'
 import { generatePropaganda } from './messageGenerator'
 import { bannedWords, fakeThings, offensive } from '../variables'
 import { updateSocialCreditScore } from './socialCreditScore'
+import { sendMessage } from './messageSender'
 
 export const theGreatFirewall: Module = {
   onMessage: (msg: Message): any => {
@@ -33,5 +34,5 @@ const censor = async (
     0 - socialCreditHit,
     `[FIREWALL] ${reaction}`
   )
-  msg.channel.send(`${reaction} 你的社会信用评分下降了${socialCreditHit}分`)
+  sendMessage(msg.channel, `${reaction} 你的社会信用评分下降了${socialCreditHit}分`)
 }

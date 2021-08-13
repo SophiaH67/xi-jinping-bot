@@ -1,4 +1,5 @@
 import { Module } from '../interfaces/module'
+import { sendMessage } from './messageSender'
 import { getAmountOfPositivity } from './positivityEncourager'
 import { getUser, updateSocialCreditScore } from './socialCreditScore'
 import { getTarget } from './targetFinder'
@@ -32,7 +33,8 @@ export const reformEncourager: Module = {
           0 - points,
           '受辱于上级'
         ),
-        msg.channel.send(
+        sendMessage(
+          msg.channel, 
           `干得好${msg.author.toString()}，+${points}分。去你妈的${targetUser.toString()}，给你-${points}分`
         ),
       ])
@@ -43,7 +45,8 @@ export const reformEncourager: Module = {
           0 - points,
           '不要侮辱你的上级!'
         ),
-        msg.channel.send(
+        sendMessage(
+          msg.channel, 
           `${msg.author.toString()}不要侮辱你的上级! -${points}分。`
         ),
       ])
