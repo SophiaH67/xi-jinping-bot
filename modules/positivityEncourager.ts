@@ -4,6 +4,7 @@ import { positiveThings } from '../variables'
 import { Module } from 'interfaces/module'
 import { updateSocialCreditScore } from './socialCreditScore'
 import 'colorts/lib/string'
+import { sendMessage } from './messageSender'
 
 const tokenizer = new WordTokenizer()
 const analyzer = new SentimentAnalyzer('English', PorterStemmer, 'afinn')
@@ -20,14 +21,14 @@ export const positivityEncourager: Module = {
           'POSITIVITY'.green
         }] Positive message detected (${amountOfPositivity})`
       )
-      msg.channel.send(`好公民! +${socialCreditChange}社会信用`)
+      sendMessage(msg.channel, `好公民! +${socialCreditChange}社会信用`)
     } else {
       console.log(
         `[${
           'POSITIVITY'.green
         }] Negative message detected (${amountOfPositivity})`
       )
-      msg.channel.send(`坏公民! ${socialCreditChange}个社会信用`)
+      sendMessage(msg.channel, `坏公民! ${socialCreditChange}个社会信用`)
     }
     await updateSocialCreditScore(
       parseInt(msg.author.id),

@@ -1,6 +1,7 @@
 import { MessageEmbed } from 'discord.js'
 import { Module } from '../interfaces/module'
 import { generatePropaganda } from './messageGenerator'
+import { sendMessage } from './messageSender'
 import { getUser } from './socialCreditScore'
 
 export const socialStatus: Module = {
@@ -20,7 +21,7 @@ export const socialStatus: Module = {
         `${log.reason}`
       )
     }
-    msg.channel.send(`${user.socialCreditScore}`, { embed: logEmbed })
+    sendMessage(msg.channel, `${user.socialCreditScore}`, logEmbed)
   },
   startup: () => {
     console.log(`[${'SOCIALSTATUS'.yellow}] ${generatePropaganda()}`)
