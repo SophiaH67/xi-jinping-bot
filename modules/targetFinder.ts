@@ -5,6 +5,6 @@ export const getTarget = async (msg: Message) => {
   if (mentioned) return mentioned.user
   if (!(msg.channel.type == "text")) return
   const msgMappings = await msg.channel.messages.fetch({ limit: 2 })
-  const previousMsg = Array.from(msgMappings.values())[1]
-  return previousMsg.author
+  const previousMsg: Message | undefined = Array.from(msgMappings.values())[1]
+  return previousMsg?.author
 }
