@@ -3,4 +3,5 @@ WORKDIR /app
 COPY ./package* ./
 RUN ["npm", "install"]
 COPY . .
-CMD ["npx", "ts-node", "--transpile-only", "index.ts"]
+RUN [ "sh", "-c", "./node_modules/typescript/bin/tsc --esModuleInterop index.ts || :" ]
+CMD ["node", "index.js"]

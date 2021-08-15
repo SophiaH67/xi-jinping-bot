@@ -1,7 +1,7 @@
 import { SentimentAnalyzer, PorterStemmer, WordTokenizer } from 'natural'
 import compromise from 'compromise'
 import { positiveThings } from '../variables'
-import { Module } from 'interfaces/module'
+import { Module } from '../interfaces/module'
 import { updateSocialCreditScore } from './socialCreditScore'
 import 'colorts/lib/string'
 import { sendMessage } from './messageSender'
