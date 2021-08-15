@@ -27,18 +27,39 @@ export const updateSocialCreditScore = async (
     { _id: citizen.id },
     {
       $inc: { socialCreditScore: change },
-      $push: { log: { change: change, reason: reason } },
     }
   )
 }
 
 export const getUser = async (id: number) => {
   const citizen = await userModel.find({ citizenID: id })
-  if (citizen[0]) return citizen[0]
+  if (citizen[0]) {
+    //@ts-ignore
+    const log: { change: number }[] | undefined = JSON.parse(
+      JSON.stringify(citizen[0])
+    ).log
+    if (log) {
+      // Migrate user
+      //@ts-ignore
+      const socialCreditScore: number = log.reduce(
+        //@ts-ignore
+        (acc, logItem) => acc.change || acc + logItem.change,
+        1000
+      )
+      console.log(`socialCreditScore: ${socialCreditScore}`)
+      const migratedCitizen = await userModel.create({
+        citizenID: id,
+        socialCreditScore: socialCreditScore,
+      })
+      await citizen[0].delete()
+      return migratedCitizen
+    }
+    return citizen[0]
+  }
   console.log(`[${'SCORE'.blue}] Added untracked user ${id}`)
   const trackedCitizen = await userModel.create({
     citizenID: id,
-    log: [],
+    socialCreditScore: 1000,
   })
   const newCitizen = await trackedCitizen.save()
   return newCitizen

@@ -13,14 +13,7 @@ export const socialStatus: Module = {
     let logEmbed = new MessageEmbed()
       .setColor('#FF0000')
       .setTitle('社会信用评分')
-    const logs = user.log.slice(-10)
-    for (let i = 0; i < logs.length; i++) {
-      const log = logs[i]
-      logEmbed.addField(
-        `${log.change > 0 ? '+' : ''}${log.change}`,
-        `${log.reason}`
-      )
-    }
+    logEmbed.description = user.socialCreditScore.toString()
     sendMessage(msg.channel, `${user.socialCreditScore}`, logEmbed)
   },
   startup: () => {
