@@ -13,7 +13,7 @@ connect(process.env.MONGO_URI, {
 export const updateSocialCreditScore = async (
   id: number,
   change: number,
-  reason: string
+  _reason: string
 ) => {
   const citizen = await getUser(id)
   console.log(
