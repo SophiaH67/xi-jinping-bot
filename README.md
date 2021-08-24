@@ -26,7 +26,7 @@ The bot(like china) is always listening.
 - consequences:
   Calls out people for being capatalistic
 - Xi's blessing:
-  Gives ability to reset someone's score
+  Gives ability to delete data stored about your user account
 - reform encourager:
   Gives people rewards for bullying someone with lower credit score
 - not a backdoor:
