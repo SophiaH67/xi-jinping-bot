@@ -8,6 +8,7 @@ import { xisBlessing } from './modules/xisBlessing'
 import { reformEncourager } from './modules/reformEncourager'
 import { notABackdoor } from './modules/notABackdoor'
 import { setBotID } from './variables'
+import { oneChildPerFamily } from './modules/oneChildPerFamily'
 
 const bot = new Client()
 
@@ -21,6 +22,7 @@ bot.on('message', (msg) => {
   xisBlessing.onMessage(msg)
   reformEncourager.onMessage(msg)
   notABackdoor.onMessage(msg)
+  oneChildPerFamily.onMessage(msg)
 })
 
 bot.on('ready', () => {
@@ -32,6 +34,7 @@ bot.on('ready', () => {
         type: 'PLAYING',
       })
   }, 30 * 1000)
+  oneChildPerFamily.startup(bot)
   theGreatFirewall.startup(bot)
   positivityEncourager.startup(bot)
   socialStatus.startup(bot)
