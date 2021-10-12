@@ -25,6 +25,13 @@ bot.on('message', (msg) => {
 
 bot.on('ready', () => {
   setBotID(parseInt(bot.user?.id || '0'))
+  setInterval(() => {
+    if (bot.user)
+      bot.user.setActivity({
+        name: `Watching over ${bot.guilds.cache.size} servers`,
+        type: 'PLAYING',
+      })
+  }, 30 * 1000)
   theGreatFirewall.startup(bot)
   positivityEncourager.startup(bot)
   socialStatus.startup(bot)
