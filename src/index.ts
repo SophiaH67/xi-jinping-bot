@@ -46,7 +46,7 @@ app.post('/check', async (req: Request, res: Response) => {
       : undefined,
     mentionedCitizens: mentionedIDs
       ? await Promise.all(mentionedIDs.map(getCitizen))
-      : undefined,
+      : [],
   }
 
   const responses = await Promise.all(rules.map((rule) => rule(args)))
