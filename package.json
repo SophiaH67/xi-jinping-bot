@@ -3,6 +3,7 @@
     "@typeit/discord": "^4.0.10",
     "@types/natural": "^2.1.1",
     "@types/node": "^15.12.4",
+    "axios": "^0.23.0",
     "colorts": "^0.1.63",
     "compromise": "^13.11.3",
     "discord.js": "^12.5.3",

@@ -8,4 +8,7 @@ const botInstanceSchema = new Schema<BotInstance>({
   userID: { type: String, required: true },
 })
 
-export const botInstanceModel = model<BotInstance>('botInstance', botInstanceSchema)
+export const botInstanceModel = model<BotInstance>(
+  'botInstance',
+  botInstanceSchema
+)
