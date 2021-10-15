@@ -42,6 +42,7 @@ app.post('/check', async (req: Request, res: Response) => {
     citizen: citizen,
     currentMessage: currentMessage,
     previousMessage: previousMessage,
+    mentionedCitizens: await Promise.all(mentionedIDs.map(getCitizen)),
     mentionedIDs: mentionedIDs,
   }
 
