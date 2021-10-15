@@ -26,12 +26,12 @@ let rules = readdirSync(rulesFolder)
   )
 
 app.post('/check', async (req: Request, res: Response) => {
-  const { citizenID, currentMessage, previousMessage, mentionedIDs } = req.body
+  const { citizenID, message, targetCitizenID, mentionedIDs } = req.body
   if (
     !(
       typeof citizenID == 'number' &&
-      typeof currentMessage == 'string' &&
-      (typeof previousMessage == 'string' || typeof previousMessage == 'undefined') &&
+      typeof message == 'string' &&
+      (typeof targetCitizenID == 'number' || typeof targetCitizenID == 'undefined') &&
       (typeof mentionedIDs == 'object' || typeof mentionedIDs == 'undefined')
     )
   )
@@ -42,10 +42,9 @@ app.post('/check', async (req: Request, res: Response) => {
   if (!citizen) return res.status(404).end()
   const args: RuleArgs = {
     citizen: citizen,
-    currentMessage: currentMessage,
-    previousMessage: previousMessage,
-    mentionedCitizens: await Promise.all((mentionedIDs||[]).map(getCitizen)),
-    mentionedIDs: mentionedIDs||[],
+    message: message,
+    targetCitizen: targetCitizenID ? await getCitizen(targetCitizenID) : undefined,
+    mentionedCitizens: mentionedIDs ? await Promise.all(mentionedIDs.map(getCitizen)) : undefined,
   }
 
   let response: ruleReturn
@@ -57,9 +56,9 @@ app.post('/check', async (req: Request, res: Response) => {
   }
   if (!response) return res.send({ message: '' })
 
-  const [message, change] = response
+  const [outMessage, change] = response
   await updateSocialCreditScore(citizen, change)
-  return res.send({ message: message })
+  return res.send({ message: outMessage })
 })
 
 app.listen(port, () => console.log(`Listening on http://0.0.0.0:${port}`))
