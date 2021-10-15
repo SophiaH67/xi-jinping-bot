@@ -28,7 +28,8 @@ app.post('/check', async (req: Request, res: Response) => {
     !(
       typeof citizenID == 'number' &&
       typeof message == 'string' &&
-      (typeof targetCitizenID == 'number' || typeof targetCitizenID == 'undefined') &&
+      (typeof targetCitizenID == 'number' ||
+        typeof targetCitizenID == 'undefined') &&
       (typeof mentionedIDs == 'object' || typeof mentionedIDs == 'undefined')
     )
   )
@@ -40,8 +41,12 @@ app.post('/check', async (req: Request, res: Response) => {
   const args: RuleArgs = {
     citizen: citizen,
     message: message,
-    targetCitizen: targetCitizenID ? await getCitizen(targetCitizenID) : undefined,
-    mentionedCitizens: mentionedIDs ? await Promise.all(mentionedIDs.map(getCitizen)) : undefined,
+    targetCitizen: targetCitizenID
+      ? await getCitizen(targetCitizenID)
+      : undefined,
+    mentionedCitizens: mentionedIDs
+      ? await Promise.all(mentionedIDs.map(getCitizen))
+      : undefined,
   }
 
   const responses = await Promise.all(rules.map((rule) => rule(args)))

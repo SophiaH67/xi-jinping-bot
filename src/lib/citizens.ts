@@ -1,10 +1,15 @@
 import { Citizen, CitizenModel } from '../schemas/User'
 
-export const updateSocialCreditScore = async (citizen: Citizen, change: number) => {
+export const updateSocialCreditScore = async (
+  citizen: Citizen,
+  change: number
+) => {
   console.log(
-    `[SCORE] ${change < 0 ? 'took' : 'added'} ${change < 0 ? 0 - change : change} ${
-      change < 0 ? 'from' : 'to'
-    } ${citizen.citizenID}'s total. Total is now ${(citizen.socialCreditScore as number) + change}`
+    `[SCORE] ${change < 0 ? 'took' : 'added'} ${
+      change < 0 ? 0 - change : change
+    } ${change < 0 ? 'from' : 'to'} ${
+      citizen.citizenID
+    }'s total. Total is now ${(citizen.socialCreditScore as number) + change}`
   )
   await CitizenModel.findOneAndUpdate(
     { _id: citizen.id },
@@ -21,7 +26,9 @@ export const updateSocialCreditScore = async (citizen: Citizen, change: number) 
 export const getCitizen = async (id: number) => {
   const citizen = await CitizenModel.findOne({ citizenID: id })
   if (citizen) {
-    const log: { change: number }[] | undefined = JSON.parse(JSON.stringify(citizen)).log
+    const log: { change: number }[] | undefined = JSON.parse(
+      JSON.stringify(citizen)
+    ).log
     if (log) {
       // Migrate user
       const socialCreditScore: number = log.reduce(

@@ -7,15 +7,23 @@ import { ruleReturn } from '../interfaces/ruleReturn'
 const tokenizer = new WordTokenizer()
 const analyzer = new SentimentAnalyzer('English', PorterStemmer, 'afinn')
 
-export default async function goodChina({ message }: RuleArgs): Promise<ruleReturn> {
+export default async function goodChina({
+  message,
+}: RuleArgs): Promise<ruleReturn> {
   if (!(await isSentenceAboutPositiveThing(message))) return
   let amountOfPositivity = getAmountOfPositivity(message)
-  let socialCreditChange = Math.round((amountOfPositivity * 40 - 10) * (Math.random() + 1))
+  let socialCreditChange = Math.round(
+    (amountOfPositivity * 40 - 10) * (Math.random() + 1)
+  )
   if (amountOfPositivity > 0) {
-    console.log(`[${'POSITIVITY'}] Positive message detected (${amountOfPositivity})`)
+    console.log(
+      `[${'POSITIVITY'}] Positive message detected (${amountOfPositivity})`
+    )
     return [`好公民! +${socialCreditChange}社会信用`, socialCreditChange]
   } else {
-    console.log(`[${'POSITIVITY'}] Negative message detected (${amountOfPositivity})`)
+    console.log(
+      `[${'POSITIVITY'}] Negative message detected (${amountOfPositivity})`
+    )
     return [`坏公民! ${socialCreditChange}个社会信用`, amountOfPositivity]
   }
 }

@@ -90,7 +90,15 @@ export const bannedWords = [
   '李洪志',
   '劉曉波动态网自由门',
 ]
-export const fakeThings = ['starvation', 'poverty', 'capitalism', 'uighur', 'uyghur', 'camp', 'slave']
+export const fakeThings = [
+  'starvation',
+  'poverty',
+  'capitalism',
+  'uighur',
+  'uyghur',
+  'camp',
+  'slave',
+]
 export const offensive = ['winnie', 'pooh', '维尼']
 export const positiveThings = [
   'ccp',
@@ -102,4 +110,4 @@ export const positiveThings = [
 ]
 export const owners = process.env.OWNER_IDS?.split(',') || []
 export let botID = 0
-export const setBotID = (id: number) => botID = id
+export const setBotID = (id: number) => (botID = id)

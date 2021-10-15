@@ -2,7 +2,9 @@ import { RuleArgs } from 'src/interfaces/rule'
 import { ruleReturn } from 'src/interfaces/ruleReturn'
 import { bannedWords, fakeThings, offensive } from '../variables'
 
-export default async function theGreatFirewall({ message }: RuleArgs): Promise<ruleReturn> {
+export default async function theGreatFirewall({
+  message,
+}: RuleArgs): Promise<ruleReturn> {
   let badWord = bannedWords.find((bad) => message.includes(bad))
   if (badWord) return [`${badWord}不存在!`, -100]
 
