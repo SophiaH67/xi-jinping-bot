@@ -24,7 +24,7 @@ export default async function goodChina({
     console.log(
       `[${'POSITIVITY'}] Negative message detected (${amountOfPositivity})`
     )
-    return [`坏公民! ${socialCreditChange}个社会信用`, amountOfPositivity]
+    return [`坏公民! ${socialCreditChange}个社会信用`, socialCreditChange]
   }
 }
 
