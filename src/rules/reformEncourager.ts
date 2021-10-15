@@ -1,13 +1,13 @@
 import { updateSocialCreditScore } from '../lib/citizens'
 import { RuleArgs } from '../interfaces/rule'
-import { ruleReturn } from '../interfaces/ruleReturn'
+import { RuleReturn } from '../interfaces/ruleReturn'
 import { getAmountOfPositivity } from './goodChina'
 
 export default async function insultingSuperiors({
   citizen,
   targetCitizen,
   message,
-}: RuleArgs): Promise<ruleReturn> {
+}: RuleArgs): Promise<RuleReturn> {
   if (!targetCitizen) return
   if (message.toLowerCase().startsWith('what is my score')) return
   if (message.toLowerCase().startsWith('xi bless ')) return

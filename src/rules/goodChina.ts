@@ -2,14 +2,14 @@ import { SentimentAnalyzer, PorterStemmer, WordTokenizer } from 'natural'
 import compromise from 'compromise'
 import { positiveThings } from '../variables'
 import { RuleArgs } from '../interfaces/rule'
-import { ruleReturn } from '../interfaces/ruleReturn'
+import { RuleReturn } from '../interfaces/ruleReturn'
 
 const tokenizer = new WordTokenizer()
 const analyzer = new SentimentAnalyzer('English', PorterStemmer, 'afinn')
 
 export default async function goodChina({
   message,
-}: RuleArgs): Promise<ruleReturn> {
+}: RuleArgs): Promise<RuleReturn> {
   if (!(await isSentenceAboutPositiveThing(message))) return
   let amountOfPositivity = getAmountOfPositivity(message)
   let socialCreditChange = Math.round(
