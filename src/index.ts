@@ -19,9 +19,11 @@ app.use(cors())
 app.use(express.json())
 
 const rulesFolder = path.join(__dirname, '/rules/')
-let rules = readdirSync(rulesFolder).map(
-  (ruleFile) => require(rulesFolder + ruleFile).default as RuleFunction
-)
+let rules = readdirSync(rulesFolder)
+  .filter(ruleFile => /.*\.(js|ts)$/.test(ruleFile))
+  .map(
+    (ruleFile) => require(rulesFolder + ruleFile).default as RuleFunction
+  )
 
 app.post('/check', async (req: Request, res: Response) => {
   const { citizenID, currentMessage, previousMessage, mentionedIDs } = req.body
