@@ -10,4 +10,4 @@ const CitizenSchema = new Schema({
   socialCreditScore: { type: Number, required: true },
 })
 
-export const UserModel = model<Citizen>('user', CitizenSchema)
+export const CitizenModel = model<Citizen>('user', CitizenSchema)
