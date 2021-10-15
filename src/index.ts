@@ -1,5 +1,5 @@
-import express, { Request, Response } from "express"
-import cors from "cors"
+import express, { Request, Response } from 'express'
+import cors from 'cors'
 
 const port = parseInt(process.env.PORT || '3000')
 
