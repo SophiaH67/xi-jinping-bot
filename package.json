@@ -1,0 +1,22 @@
+{
+  "name": "xi-jinping-backend",
+  "version": "1.0.0",
+  "description": "The backend for the Xi Jinping bot (https://github.com/marnixah/xi-jinping-bot)",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marnixah/xi-jinping-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marnixah/xi-jinping-backend/issues"
+  },
+  "homepage": "https://github.com/marnixah/xi-jinping-backend#readme",
+  "devDependencies": {
+    "typescript": "^4.4.4"
+  }
+}
