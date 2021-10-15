@@ -3,7 +3,6 @@ import cors from 'cors'
 import { readdirSync } from 'fs'
 import path from 'path'
 import { RuleFunction } from './interfaces/ruleFunction'
-import { ruleReturn } from './interfaces/ruleReturn'
 import { RuleArgs } from './interfaces/rule'
 import mongoose from 'mongoose'
 import assert from 'assert'
@@ -20,10 +19,8 @@ app.use(express.json())
 
 const rulesFolder = path.join(__dirname, '/rules/')
 let rules = readdirSync(rulesFolder)
-  .filter(ruleFile => /.*\.(js|ts)$/.test(ruleFile))
-  .map(
-    (ruleFile) => require(rulesFolder + ruleFile).default as RuleFunction
-  )
+  .filter((ruleFile) => /.*\.(js|ts)$/.test(ruleFile))
+  .map((ruleFile) => require(rulesFolder + ruleFile).default as RuleFunction)
 
 app.post('/check', async (req: Request, res: Response) => {
   const { citizenID, message, targetCitizenID, mentionedIDs } = req.body
@@ -47,18 +44,20 @@ app.post('/check', async (req: Request, res: Response) => {
     mentionedCitizens: mentionedIDs ? await Promise.all(mentionedIDs.map(getCitizen)) : undefined,
   }
 
-  let response: ruleReturn
+  const responses = await Promise.all(rules.map((rule) => rule(args)))
 
-  for (let i = 0; i < rules.length; i++) {
-    const rule = rules[i]
-    response = await rule(args)
-    if (response) break
-  }
-  if (!response) return res.send({ message: '' })
+  let messages: string[] = []
+  let totalSocialChange = 0
 
-  const [outMessage, change] = response
-  await updateSocialCreditScore(citizen, change)
-  return res.send({ message: outMessage })
+  responses
+    .filter((response) => response)
+    .forEach((response) => {
+      totalSocialChange = totalSocialChange + response![1]
+      messages.push(response![0])
+    })
+
+  await updateSocialCreditScore(citizen, totalSocialChange)
+  return res.send({ messages: messages })
 })
 
 app.listen(port, () => console.log(`Listening on http://0.0.0.0:${port}`))
