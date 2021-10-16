@@ -1,4 +1,4 @@
-FROM node:15-alpine
+FROM node:16-slim
 WORKDIR /app
 COPY ./package* ./
 RUN ["npm", "install"]

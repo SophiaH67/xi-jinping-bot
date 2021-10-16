@@ -1,18 +1,13 @@
-import { Client } from '@typeit/discord'
 import assert from 'assert'
 import { botInstanceModel } from './schemas/botInstanceSchema'
 import axios from 'axios'
-import { Message } from 'discord.js'
+import { Client, Message, Intents } from 'discord.js'
 import { connect } from 'mongoose'
 
 assert(process.env.MONGO_URI)
-connect(process.env.MONGO_URI, {
-  useFindAndModify: false,
-  useUnifiedTopology: true,
-  useNewUrlParser: true,
-})
+connect(process.env.MONGO_URI)
 
-const bot = new Client()
+const bot = new Client({allowedMentions: { parse: ['users'] }, intents: [Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.DIRECT_MESSAGES, Intents.FLAGS.GUILDS], partials: ["CHANNEL"]})
 const backendBase = `http://${process.env.BACKEND_HOST || 'localhost:3000'}/`
 
 let botIDs: string[] = []
@@ -20,7 +15,7 @@ let botIDs: string[] = []
 const getTarget = async (msg: Message) => {
   const mentioned = msg.mentions.members?.first()
   if (mentioned) return mentioned.user
-  if (!(msg.channel.type == 'text')) return
+  if (!(msg.channel.type == 'GUILD_TEXT')) return
   try {
     const msgMappings = await msg.channel.messages.fetch({ limit: 2 })
     const previousMsg: Message | undefined = Array.from(msgMappings.values())[1]
@@ -30,10 +25,10 @@ const getTarget = async (msg: Message) => {
   }
 }
 
-bot.on('message', async (msg) => {
+bot.on('messageCreate', async (msg) => {
   if (!msg.client.user) return
   if (msg.author.id === msg.client.user.id) return
-  if (botIDs.includes(msg.author.id)) return msg.guild?.leave()
+  if (botIDs.includes(msg.author.id)) {msg.guild?.leave(); return}
 
   const target = await getTarget(msg)
   const response = await axios.post(backendBase + 'check', {
@@ -50,11 +45,12 @@ bot.on('message', async (msg) => {
     msg.channel.send(message)
       .catch(_=>{})
     })
-  
-  return
+
+    return
 })
 
 bot.on('ready', async () => {
+  console.log('ready')
   setInterval(() => {
     if(bot.user)
       bot.user.setActivity({
