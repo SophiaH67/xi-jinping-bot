@@ -57,12 +57,16 @@ bot.on('ready', async () => {
         name: `Watching over ${bot.guilds.cache.size} servers`,
         type: 'PLAYING',
     })
+    updateServerCount()
   }, 30 * 1000)
 
   //@ts-ignore
   const userID: string = bot.user.id
-  const found = await botInstanceModel.findOne({ userID: userID })
-  if (!found) await (await botInstanceModel.create({ userID: userID })).save()
+  let thisBot = await botInstanceModel.findOne({ userID: userID })
+  if (!thisBot) {
+    thisBot = await botInstanceModel.create({ userID: userID })
+    await thisBot.save()
+  }
 
   const updateBotInstancesCache = async () => {
     const botInstances = await botInstanceModel.find({
@@ -70,6 +74,11 @@ bot.on('ready', async () => {
     })
     botIDs = botInstances.map((botInstance) => botInstance.userID)
   }
+
+  const updateServerCount = async () => {
+    await botInstanceModel.updateOne({_id: thisBot?._id}, {serverCount: bot.guilds.cache.size})
+  } 
+
   updateBotInstancesCache()
   setInterval(updateBotInstancesCache, 300 * 1000)
 })
