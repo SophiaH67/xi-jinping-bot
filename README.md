@@ -15,7 +15,15 @@ Enforces chinese laws in discord. [Prod version running here](https://discord.co
 
 The bot(like china) is always listening.
 
+Current commands are 
+- ``What is my score?`` with an optional mention
+of a user(e.g. ``What is my score? @timmy``).
+- ``Xi bless`` which resets your own score
+
+
 ### Current modules
+
+These modules are all loaded in the backend
 
 - firewall:
   enforces great firewall rules (blocks bannedWords from variables.ts)
