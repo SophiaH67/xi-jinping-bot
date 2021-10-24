@@ -2,14 +2,13 @@
 
 Enforces chinese laws in discord. [Prod version running here](https://discord.com/oauth2/authorize?client_id=856891296244695040&scope=bot&permissions=0)
 
-## Environment variables
+## Running
 
-- MONGO_URI =
-  mongodb://user:pass@host:port
-- TOKEN =
-  your discord token
-- OWNER_IDS =
-  comma seperated list of owner ID's
+To run your own instance of the bot, download the docker-compose.yml
+included in the repo. Edit the values(you should only touch TOKEN
+unless you know what you're doing) and run ``docker-compose up -d``.
+
+Xi jinping should now be running!
 
 ## Usage
 
