@@ -107,6 +107,12 @@ export const positiveThings = [
   'jinping',
   'communis',
   'huawei',
+  'bing chilling',
+  'bingchilling',
+  'bīngqílín',
+  'bingqilin',
+  'binqilin',
+  'bingilin'
 ]
 export const owners = process.env.OWNER_IDS?.split(',') || []
 export let botID = 0
