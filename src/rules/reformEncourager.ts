@@ -21,12 +21,12 @@ export default async function insultingSuperiors({
   if (citizen.socialCreditScore > targetCitizen.socialCreditScore) {
     await updateSocialCreditScore(targetCitizen, -points)
     return [
-      `干得好<@${citizen.citizenID.toString()}>，+${points}分。去你妈的<@${targetCitizen.citizenID.toString()}>，给你-${points}分`,
+      `干得好<@!${citizen.citizenID.toString()}>，+${points}分。去你妈的<@${targetCitizen.citizenID.toString()}>，给你-${points}分`,
       points,
     ]
   } else {
     return [
-      `<@${citizen.citizenID.toString()}>不要侮辱你的上级! -${points}分。`,
+      `<@!${citizen.citizenID.toString()}>不要侮辱你的上级! -${points}分。`,
       -points,
     ]
   }
