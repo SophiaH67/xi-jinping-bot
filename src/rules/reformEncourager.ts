@@ -18,6 +18,7 @@ export default async function insultingSuperiors({
   let points = Math.floor(30 * (Math.random() + 1) * amountOfPositivity * -1)
   if (!points) return
 
+  console.log(`Original citizenID was ${citizen.citizenID}. New one is ${(citizen.citizenID+1)}`)
   if (citizen.socialCreditScore > targetCitizen.socialCreditScore) {
     await updateSocialCreditScore(targetCitizen, -points)
     return [
