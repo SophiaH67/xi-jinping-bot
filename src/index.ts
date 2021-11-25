@@ -23,10 +23,12 @@ let rules = readdirSync(rulesFolder)
   .map((ruleFile) => require(rulesFolder + ruleFile).default as RuleFunction)
 
 app.post('/check', async (req: Request, res: Response) => {
-  const { citizenID, message, targetCitizenID, mentionedIDs } = req.body
+  const { citizenID, discordID, message, targetCitizenID, mentionedIDs } =
+    req.body
   if (
     !(
       typeof citizenID == 'number' &&
+      typeof discordID == 'string' &&
       typeof message == 'string' &&
       (typeof targetCitizenID == 'number' ||
         typeof targetCitizenID == 'undefined') &&
@@ -35,7 +37,7 @@ app.post('/check', async (req: Request, res: Response) => {
   )
     return res.status(400).end()
 
-  const citizen = await getCitizen(citizenID)
+  const citizen = await getCitizen(citizenID, discordID)
 
   if (!citizen) return res.status(404).end()
   const args: RuleArgs = {

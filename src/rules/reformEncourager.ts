@@ -18,18 +18,19 @@ export default async function insultingSuperiors({
   let points = Math.floor(30 * (Math.random() + 1) * amountOfPositivity * -1)
   if (!points) return
 
-  console.log(`Original citizenID was ${citizen.citizenID}. New one is ${(citizen.citizenID+1)}`)
   if (citizen.socialCreditScore > targetCitizen.socialCreditScore) {
     await updateSocialCreditScore(targetCitizen, -points)
     return [
       //@ts-ignore
-      `干得好<@${(citizen.citizenID+1).toString()}>，+${points}分。去你妈的<@${(targetCitizen.citizenID+1).toString()}>，给你-${points}分`,
+      `干得好<@${citizen.discordID}>，+${points}分。去你妈的<@${
+        targetCitizen.discordID || targetCitizen.citizenID
+      }>，给你-${points}分`,
       points,
     ]
   } else {
     return [
       //@ts-ignore
-      `<@!${(citizen.citizenID+1).toString()}>不要侮辱你的上级! -${points}分。`,
+      `<@!${citizen.discordID}>不要侮辱你的上级! -${points}分。`,
       -points,
     ]
   }

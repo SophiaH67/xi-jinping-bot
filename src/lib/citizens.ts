@@ -23,9 +23,15 @@ export const updateSocialCreditScore = async (
   )
 }
 
-export const getCitizen = async (id: number) => {
+export const getCitizen = async (id: number, discordID?: string) => {
   const citizen = await CitizenModel.findOne({ citizenID: id })
   if (citizen) {
+    // Add discordID to citizen if it doesn't exist
+    if (discordID && !citizen.discordID) {
+      citizen.discordID = discordID
+      await citizen.save()
+    }
+
     const log: { change: number }[] | undefined = JSON.parse(
       JSON.stringify(citizen)
     ).log
