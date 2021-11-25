@@ -33,6 +33,7 @@ bot.on('messageCreate', async (msg) => {
   const target = await getTarget(msg)
   const response = await axios.post(backendBase + 'check', {
     citizenID: parseInt(msg.author.id),
+    discordID: msg.author.id,
     message: msg.content,
     targetCitizenID: target ? parseInt(target.id) : undefined,
     mentionedIDs: msg.mentions.members
