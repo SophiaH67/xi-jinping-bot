@@ -25,38 +25,39 @@ export const updateSocialCreditScore = async (
 
 export const getCitizen = async (id: number, discordID?: string) => {
   const citizen = await CitizenModel.findOne({ citizenID: id })
-  if (citizen) {
-    // Add discordID to citizen if it doesn't exist
-    if (discordID && !citizen.discordID) {
-      citizen.discordID = discordID
-      await citizen.save()
-    }
-
-    const log: { change: number }[] | undefined = JSON.parse(
-      JSON.stringify(citizen)
-    ).log
-    if (log) {
-      // Migrate user
-      const socialCreditScore: number = log.reduce(
-        // We have to use ts-ignore, because old
-        // model isn't recognized by typescript
-        //@ts-ignore
-        (acc, logItem) => acc.change || acc + logItem.change,
-        1000
-      )
-      const migratedCitizen = await CitizenModel.create({
-        citizenID: id,
-        socialCreditScore: socialCreditScore,
-      })
-      await citizen.delete()
-      return migratedCitizen
-    }
-    return citizen
+  if (!citizen) {
+    const trackedCitizen = await CitizenModel.create({
+      citizenID: id,
+      discordID: discordID,
+      socialCreditScore: 1000,
+    })
+    const newCitizen = await trackedCitizen.save()
+    return newCitizen
   }
-  const trackedCitizen = await CitizenModel.create({
-    citizenID: id,
-    socialCreditScore: 1000,
-  })
-  const newCitizen = await trackedCitizen.save()
-  return newCitizen
+  // Add discordID to citizen if it doesn't exist
+  if (discordID && !citizen.discordID) {
+    citizen.discordID = discordID
+    await citizen.save()
+  }
+
+  const log: { change: number }[] | undefined = JSON.parse(
+    JSON.stringify(citizen)
+  ).log
+  if (log) {
+    // Migrate user
+    const socialCreditScore: number = log.reduce(
+      // We have to use ts-ignore, because old
+      // model isn't recognized by typescript
+      //@ts-ignore
+      (acc, logItem) => acc.change || acc + logItem.change,
+      1000
+    )
+    const migratedCitizen = await CitizenModel.create({
+      citizenID: id,
+      socialCreditScore: socialCreditScore,
+    })
+    await citizen.delete()
+    return migratedCitizen
+  }
+  return citizen
 }
