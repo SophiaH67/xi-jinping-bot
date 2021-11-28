@@ -2,11 +2,33 @@
 
 Enforces chinese laws in discord. [Prod version running here](https://discord.com/oauth2/authorize?client_id=856891296244695040&scope=bot&permissions=0)
 
-## Running
+## Running / setup
+
+### Generic
 
 To run your own instance of the bot, download the docker-compose.yml
 included in the repo. Edit the values(you should only touch TOKEN
 unless you know what you're doing) and run ``docker-compose up -d``.
+
+Xi jinping should now be running!
+
+### Ubuntu setup
+
+Install docker+docker-compose with
+```bash
+sudo apt update -y
+sudo apt install -y docker.io
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+```
+
+Now that you have docker-compose installed, you can run the following to download the docker-compose file
+
+```bash
+wget https://raw.githubusercontent.com/marnixah/xi-jinping-bot/master/docker-compose.yml
+```
+
+Edit the value for ``TOKEN`` in docker-compose.yml and then run ``docker-compose up -d``
 
 Xi jinping should now be running!
 
@@ -18,7 +40,6 @@ Current commands are
 - ``What is my score?`` with an optional mention
 of a user(e.g. ``What is my score? @timmy``).
 - ``Xi bless`` which resets your own score
-
 
 ### Current modules
 
