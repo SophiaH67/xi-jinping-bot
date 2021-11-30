@@ -17,12 +17,11 @@ Xi jinping should now be running!
 Install docker+docker-compose with
 ```bash
 sudo apt update -y
-sudo apt install -y docker.io
-sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+sudo apt install -y docker.io docker-compose
+sudo systemctl enable --now docker
 ```
 
-Now that you have docker-compose installed, you can run the following to download the docker-compose file
+Now that you have docker and docker-compose installed, you can run the following to download the docker-compose file
 
 ```bash
 wget https://raw.githubusercontent.com/marnixah/xi-jinping-bot/master/docker-compose.yml
