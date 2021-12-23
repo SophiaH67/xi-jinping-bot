@@ -174,7 +174,7 @@ export const bannedWords = [
   '自由光诚',
   '陈光诚',
   '使馆',
-  '陈光诚'
+  '陈光诚',
   '光诚',
   '沂南',
   '沂南',
@@ -272,9 +272,9 @@ export const fakeThings = [
   '戒严',
   '北京事件',
   '北京怎么了',
-  '砍杀'
-  '杨杰'
-  '陈刚'
+  '砍杀',
+  '杨杰',
+  '陈刚',
 ] //假消息
 export const offensive = [
   'winnie',
@@ -288,9 +288,9 @@ export const offensive = [
   '麦子',
   '十里山路',
   '不换肩',
-  '沼气池'.
+  '沼气池',
   '满脸喷粪',
-  '宽衣'，
+  '宽衣',
   '萨格尔王',
   '习明泽',
   '禁评',
@@ -310,7 +310,7 @@ export const positiveThings = [
   'bīngqílín',
   'bingqilin',
   'binqilin',
-  'bingilin'
+  'bingilin',
 ] //加分项
 export const owners = process.env.OWNER_IDS?.split(',') || []
 export let botID = 0
