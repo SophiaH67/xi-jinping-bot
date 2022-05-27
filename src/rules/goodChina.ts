@@ -47,7 +47,7 @@ async function rewriteMessage(
     baseMessage += `好公民! +${socialCreditChange}社会信用。`
   } else {
     baseMessage += `坏公民! ${socialCreditChange}个社会信用。`
-
+    console.log('[goodChina] Asking AI for advice...')
     const response = await openai.complete({
       engine: 'davinci',
       prompt: `
