@@ -55,7 +55,7 @@ Rewrite the following sentence to be positive about China:
 Original: ${message}
 Positive about China:`.trim(),
       maxTokens: 120,
-      temperature: 0.7,
+      temperature: 0.9,
       stop: ['\n'],
     })
 
