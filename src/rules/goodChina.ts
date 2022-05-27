@@ -3,9 +3,12 @@ import compromise from 'compromise'
 import { positiveThings } from '../variables'
 import { RuleArgs } from '../interfaces/rule'
 import { RuleReturn } from '../interfaces/ruleReturn'
+import OpenAI from 'openai-api'
 
 const tokenizer = new WordTokenizer()
 const analyzer = new SentimentAnalyzer('English', PorterStemmer, 'afinn')
+
+const openai = new OpenAI(process.env.OPENAI_API_KEY || '')
 
 export default async function goodChina({
   message,
@@ -15,17 +18,7 @@ export default async function goodChina({
   let socialCreditChange = Math.round(
     (amountOfPositivity * 40 - 10) * (Math.random() + 1)
   )
-  if (amountOfPositivity > 0) {
-    console.log(
-      `[${'POSITIVITY'}] Positive message detected (${amountOfPositivity})`
-    )
-    return [`好公民! +${socialCreditChange}社会信用`, socialCreditChange]
-  } else {
-    console.log(
-      `[${'POSITIVITY'}] Negative message detected (${amountOfPositivity})`
-    )
-    return [`坏公民! ${socialCreditChange}个社会信用`, socialCreditChange]
-  }
+  return await rewriteMessage(message, socialCreditChange)
 }
 
 export const getAmountOfPositivity = (sentence: string) =>
@@ -42,4 +35,33 @@ const isSentenceAboutPositiveThing = (sentence: string) => {
     })
     resolve(false)
   })
+}
+
+async function rewriteMessage(
+  message: string,
+  socialCreditChange: number
+): Promise<RuleReturn> {
+  let baseMessage = ''
+
+  if (socialCreditChange > 0) {
+    baseMessage += `好公民! +${socialCreditChange}社会信用。`
+  } else {
+    baseMessage += `坏公民! ${socialCreditChange}个社会信用。`
+
+    const response = await openai.complete({
+      engine: 'davinci',
+      prompt: `
+Rewrite the following sentence to be positive about China:
+Original: ${message}
+Positive about China:`.trim(),
+      maxTokens: 120,
+      temperature: 0.7,
+    })
+
+    if (response?.data?.choices[0]?.text) {
+      baseMessage += `我想你是想说${response.data.choices[0].text}`
+    }
+  }
+
+  return [baseMessage, socialCreditChange]
 }
