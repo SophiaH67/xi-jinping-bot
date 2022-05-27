@@ -56,10 +56,11 @@ Original: ${message}
 Positive about China:`.trim(),
       maxTokens: 120,
       temperature: 0.7,
+      stop: ['\n'],
     })
 
-    if (response?.data?.choices[0]?.text) {
-      baseMessage += `我想你是想说${response.data.choices[0].text}`
+    if (response?.data?.choices[0]?.text?.trim?.()) {
+      baseMessage += `我想你是想说${response.data.choices[0].text.trim()}`
     }
   }
 
