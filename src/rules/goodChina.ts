@@ -45,8 +45,10 @@ async function rewriteMessage(
 
   if (socialCreditChange > 0) {
     baseMessage += `好公民! +${socialCreditChange}社会信用。`
+    return [baseMessage, socialCreditChange]
   } else {
     baseMessage += `坏公民! ${socialCreditChange}个社会信用。`
+    return [baseMessage, socialCreditChange]; // Disable GPT3 for now, this code needs to be improved first
     console.log('[goodChina] Asking AI for advice...')
     const response = await openai.complete({
       engine: 'davinci',
