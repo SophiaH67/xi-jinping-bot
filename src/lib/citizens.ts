@@ -23,8 +23,8 @@ export const updateSocialCreditScore = async (
   )
 }
 
-export const getCitizen = async (id: number, discordID?: string) => {
-  const citizen = await CitizenModel.findOne({ citizenID: id })
+export const getCitizen = async (id: string, discordID?: string) => {
+  const citizen = await CitizenModel.findOne({ citizenID: parseInt(id) })
   if (!citizen) {
     const trackedCitizen = await CitizenModel.create({
       citizenID: id,
