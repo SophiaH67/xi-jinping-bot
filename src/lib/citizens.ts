@@ -17,7 +17,7 @@ export const updateSocialCreditScore = async (
       // For some reason mongo queries
       // aren't in the type definitions
       // so this is a forced one.
-      //@ts-ignore
+      //@ts-expect-error
       $inc: { socialCreditScore: change },
     }
   )
@@ -48,7 +48,7 @@ export const getCitizen = async (id: string, discordID?: string) => {
     const socialCreditScore: number = log.reduce(
       // We have to use ts-ignore, because old
       // model isn't recognized by typescript
-      //@ts-ignore
+      //@ts-expect-error
       (acc, logItem) => acc.change || acc + logItem.change,
       1000
     )
