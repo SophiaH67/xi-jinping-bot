@@ -297,6 +297,7 @@ export const offensive = [
   '小熊',
   '加速',
   '称帝',
+  'taiwan',
 ] //乳包
 export const positiveThings = [
   'ccp',
