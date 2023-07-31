@@ -16,7 +16,12 @@ export default async function goodChina({
   const socialCreditChange = Math.round(
     (amountOfPositivity * 40 - 10) * (Math.random() + 1),
   );
-  return [`好公民! +${socialCreditChange}社会信用。`, socialCreditChange];
+  return [
+    `好公民! ${
+      socialCreditChange > 0 ? '+' : ''
+    }${socialCreditChange}社会信用。`,
+    socialCreditChange,
+  ];
 }
 
 export const getAmountOfPositivity = (sentence: string) =>
