@@ -1,1 +1,1 @@
-export type RuleReturn = [string, number] | undefined
+export type RuleReturn = [string, number] | undefined;

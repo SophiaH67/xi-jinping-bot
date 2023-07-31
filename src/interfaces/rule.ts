@@ -1,8 +1,8 @@
-import { Citizen } from '../schemas/User'
+import { CitizenDocument } from '../citizen/schemas/Citizen';
 
 export interface RuleArgs {
-  citizen: Citizen & { _id: any }
-  message: string
-  targetCitizen?: Citizen & { _id: any }
-  mentionedCitizens: (Citizen & { _id: any })[]
+  citizen: CitizenDocument;
+  message: string;
+  targetCitizen?: CitizenDocument;
+  mentionedCitizens: CitizenDocument[];
 }

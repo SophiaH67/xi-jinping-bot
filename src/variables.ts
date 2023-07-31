@@ -1,4 +1,4 @@
-export const bannedWords = [ 
+export const bannedWords = [
   '天安门',
   'tiananmen',
   '六四',
@@ -252,8 +252,8 @@ export const bannedWords = [
   '小屋',
   '日记',
   '鲁昕',
-] //中共敏感词（非乳包内容）
-export const fakeThings = [ 
+]; //中共敏感词（非乳包内容）
+export const fakeThings = [
   'starvation',
   'poverty',
   'capitalism',
@@ -275,7 +275,7 @@ export const fakeThings = [
   '砍杀',
   '杨杰',
   '陈刚',
-] //假消息
+]; //假消息
 export const offensive = [
   'winnie',
   'pooh',
@@ -298,7 +298,8 @@ export const offensive = [
   '加速',
   '称帝',
   'taiwan',
-] //乳包
+]; //乳包
+
 export const positiveThings = [
   'ccp',
   'china',
@@ -306,13 +307,13 @@ export const positiveThings = [
   'jinping',
   'communis',
   'huawei',
-  'bing chilling', 
+  'bing chilling',
   'bingchilling',
   'bīngqílín',
   'bingqilin',
   'binqilin',
   'bingilin',
-] //加分项
-export const owners = process.env.OWNER_IDS?.split(',') || []
-export let botID = 0
-export const setBotID = (id: number) => (botID = id)
+]; //加分项
+export const owners = process.env.OWNER_IDS?.split(',') || [];
+export let botID = 0;
+export const setBotID = (id: number) => (botID = id);
