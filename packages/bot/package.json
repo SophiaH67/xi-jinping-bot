@@ -6,6 +6,7 @@
     "colorts": "^0.1.63",
     "compromise": "^13.11.4",
     "discord.js": "^13.2.0",
+    "dotenv": "^16.3.1",
     "mongoose": "^6.0.11",
     "natural": "^5.1.1",
     "tslib": "^2.3.1",
