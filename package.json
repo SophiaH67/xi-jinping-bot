@@ -1,0 +1,15 @@
+{
+  "name": "xi-jinping-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/SophiaH67/xi-jinping-bot.git",
+  "author": "Sophia Hage <sophia@sophiah.gay>",
+  "license": "MIT",
+  "devDependencies": {
+    "lerna": "^8.0.1"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "private": true
+}
