@@ -11,5 +11,8 @@
   "workspaces": [
     "packages/*"
   ],
-  "private": true
+  "private": true,
+  "scripts": {
+    "start:dev": "lerna run start:dev --stream"
+  }
 }
