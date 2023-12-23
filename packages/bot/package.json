@@ -21,7 +21,9 @@
   "main": "index.ts",
   "scripts": {
     "start:dev:tab": "open-in-terminal-tab -t bot -- yarn start:dev",
-    "start:dev": "nodemon index.ts"
+    "start:dev": "nodemon index.ts",
+    "start:prod": "node index.js",
+    "build": "tsc"
   },
   "name": "xi-jinping-bot",
   "version": "1.0.0"

@@ -1,7 +1,9 @@
-FROM archlinux:base
-RUN pacman -Sy nodejs-lts-hydrogen npm openssl --noconfirm
+FROM node:16-slim
 WORKDIR /app
+COPY ./package.json ./
+COPY ./yarn.lock ./
+RUN yarn install --frozen-lockfile
 COPY . .
-RUN npm install
-RUN npm run build
-CMD ["sh", "-c", "node dist/main.js"]
+WORKDIR /app/packages/backend
+RUN yarn build
+CMD ["yarn", "start:prod"]
