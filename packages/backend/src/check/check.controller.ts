@@ -22,11 +22,15 @@ export class CheckController {
       ),
     );
 
+    await this.citizenService.updateCitizen(citizen, body);
+
     const ruleArgs: RuleArgs = {
       citizen,
       message: body.message,
       mentionedCitizens: mentionedCitizens,
       targetCitizen: targetCitizen,
+      guild: body.guild,
+      citizenService: this.citizenService,
     };
 
     const { messages, totalSocialChange } = await this.checkService.check(

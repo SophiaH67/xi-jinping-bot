@@ -9,6 +9,7 @@ import reformEncourager from './rules/reformEncourager';
 import theGreatFirewall from './rules/theGreatFirewall';
 import whatIsMyScore from './rules/whatIsMyScore';
 import xisBlessing from './rules/xisBlessing';
+import leaderboardRule from './rules/leaderboard';
 
 @Injectable()
 export class CheckService {
@@ -24,6 +25,7 @@ export class CheckService {
       theGreatFirewall,
       whatIsMyScore,
       xisBlessing,
+      leaderboardRule,
     ];
   }
 

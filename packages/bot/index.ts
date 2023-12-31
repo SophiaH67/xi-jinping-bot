@@ -47,10 +47,18 @@ bot.on('messageCreate', async (msg) => {
   const target = await getTarget(msg)
   const message: OnMessageDto = {
     citizenID: msg.author.id,
+    citizenUsername: msg.author.username,
     message: msg.content,
     targetCitizenID: target?.id,
     mentionedIDs: msg.mentions.members?.map((member) => member.id) ?? [],
+    guild: msg.guild
+      ? {
+          id: msg.guild.id,
+          name: msg.guild.name,
+        }
+      : undefined,
   }
+
   const response = await axios.post(backendBase + 'check', message)
   const { messages } = response.data as { messages: string[] }
   messages.forEach((message) => {

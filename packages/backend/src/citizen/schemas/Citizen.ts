@@ -13,6 +13,12 @@ export class Citizen {
 
   @Prop({ required: true })
   socialCreditScore: number;
+
+  @Prop({ required: true, default: [] })
+  guilds: string[]; // guild IDs
+
+  @Prop({ required: true, default: 'unknown' })
+  username: string;
 }
 
 export const CitizenSchema = SchemaFactory.createForClass(Citizen);

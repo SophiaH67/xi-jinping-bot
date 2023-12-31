@@ -2,6 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { Citizen, CitizenDocument } from './schemas/Citizen';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { CheckRequestDto } from 'src/check/dto/check.dto';
 
 @Injectable()
 export class CitizenService {
@@ -44,6 +45,19 @@ export class CitizenService {
     return newCitizen;
   }
 
+  public async updateCitizen(
+    citizen: CitizenDocument,
+    checkBody: CheckRequestDto,
+  ) {
+    if (checkBody.guild && !citizen.guilds.includes(checkBody.guild.id))
+      citizen.guilds.push(checkBody.guild.id);
+
+    if (checkBody.citizenUsername !== citizen.username)
+      citizen.username = checkBody.citizenUsername;
+
+    await citizen.save();
+  }
+
   async updateSocialCreditScore(
     citizenId: string,
     change: number,
@@ -61,5 +75,9 @@ export class CitizenService {
       { discordID: citizenId },
       { $inc: { socialCreditScore: change } },
     );
+  }
+
+  public async getCitizensFromGuild(guildId: string): Promise<Citizen[]> {
+    return await this.citizenModel.find({ guilds: guildId });
   }
 }

@@ -1,9 +1,12 @@
 import { IsArray, IsOptional, IsString } from 'class-validator';
-import { OnMessageDto } from 'xi-jinping-types';
+import { GuildDto, OnMessageDto } from 'xi-jinping-types';
 
 export class CheckRequestDto implements OnMessageDto {
   @IsString()
   citizenID: string;
+
+  @IsString()
+  citizenUsername: string;
 
   @IsString()
   message: string;
@@ -15,4 +18,7 @@ export class CheckRequestDto implements OnMessageDto {
   @IsArray()
   @IsString({ each: true })
   mentionedIDs: string[];
+
+  @IsOptional()
+  guild?: GuildDto;
 }
