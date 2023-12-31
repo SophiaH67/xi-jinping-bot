@@ -5,6 +5,7 @@ import { botInstanceModel } from './schemas/botInstanceSchema'
 import axios from 'axios'
 import { Client, Message, Intents } from 'discord.js'
 import { connect } from 'mongoose'
+import { OnMessageDto } from 'xi-jinping-types'
 
 assert(process.env.MONGO_URI)
 connect(process.env.MONGO_URI)
@@ -44,12 +45,13 @@ bot.on('messageCreate', async (msg) => {
   }
 
   const target = await getTarget(msg)
-  const response = await axios.post(backendBase + 'check', {
+  const message: OnMessageDto = {
     citizenID: msg.author.id,
     message: msg.content,
     targetCitizenID: target?.id,
-    mentionedIDs: msg.mentions.members?.map((member) => member.id),
-  })
+    mentionedIDs: msg.mentions.members?.map((member) => member.id) ?? [],
+  }
+  const response = await axios.post(backendBase + 'check', message)
   const { messages } = response.data as { messages: string[] }
   messages.forEach((message) => {
     if (!message) return

@@ -31,7 +31,8 @@
     "mongoose": "^7.4.1",
     "natural": "^6.5.0",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "xi-jinping-types": "1.0.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",

@@ -1,0 +1,8 @@
+{
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "name": "xi-jinping-types",
+  "version": "1.0.0"
+}

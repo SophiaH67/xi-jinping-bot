@@ -1,6 +1,7 @@
 import { IsArray, IsOptional, IsString } from 'class-validator';
+import { OnMessageDto } from 'xi-jinping-types';
 
-export class CheckRequestDto {
+export class CheckRequestDto implements OnMessageDto {
   @IsString()
   citizenID: string;
 
