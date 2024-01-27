@@ -25,10 +25,10 @@ public class XiJinpingBot : DiscordSocketClient
   private async Task<string[]> SendMessageToBackend(SocketMessage message)
   {
     XiJinpingMessageDto dto = await XiJinpingMessageDto.FromMessage(message);
-    string json = JsonConvert.SerializeObject(dto);
 
     HttpRequestMessage request = new(HttpMethod.Post, "http://localhost:3000/check");
-    request.Content = new StringContent(json);
+
+    request.Content = new StringContent(JsonConvert.SerializeObject(dto));
     request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
     HttpResponseMessage response = await httpClient.SendAsync(request);
