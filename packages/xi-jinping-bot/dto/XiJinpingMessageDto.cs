@@ -24,7 +24,8 @@ class XiJinpingMessageDto
 
   public static async Task<XiJinpingMessageDto> FromMessage(SocketMessage message)
   {
-    string? target = await TargetExtractor.FindTargetFromMessage(message);
+    TargetExtractor targetExtractor = new();
+    string? target = await targetExtractor.FindTargetFromMessage(message);
 
     XiJinpingGuildDto? guild = null;
     if (message.Channel is SocketGuildChannel channel)

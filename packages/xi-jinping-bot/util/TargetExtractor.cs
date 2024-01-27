@@ -3,16 +3,29 @@ using Discord.WebSocket;
 
 public class TargetExtractor
 {
-  public static async Task<string?> FindTargetFromMessage(SocketMessage message)
+  public async Task<string?> FindTargetFromMessage(SocketMessage message)
   {
-    // See if there are any mentions
+    string? target = null;
+
+    target ??= GetTargetFromMention(message);
+    target ??= await GetTargetFromReply(message);
+    target ??= await GetTargetFromPreviousMessage(message);
+
+    return target;
+  }
+
+  private string? GetTargetFromMention(SocketMessage message)
+  {
     if (message.MentionedUsers.Count > 0)
     {
       return message.MentionedUsers.First().Id.ToString();
     }
 
-    // See if there is a reply
+    return null;
+  }
 
+  private async Task<string?> GetTargetFromReply(SocketMessage message)
+  {
     if (message.Reference != null)
     {
       Optional<ulong> messageId = message.Reference.MessageId;
@@ -25,9 +38,12 @@ public class TargetExtractor
       return repliedMessage.Author.Id.ToString();
     };
 
-    // Get the previous message
+    return null;
+  }
+
+  private async Task<string?> GetTargetFromPreviousMessage(SocketMessage message)
+  {
     IEnumerable<IMessage> messagesEnumerable = await message.Channel.GetMessagesAsync(limit: 2).FlattenAsync();
-    // Convert the IAsyncEnumerable<IMessage> to a List<IMessage>
     List<IMessage> messages = messagesEnumerable.ToList();
 
     if (messages.Count < 2)
