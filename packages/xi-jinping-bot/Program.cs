@@ -7,8 +7,8 @@ public class Program
 
   public async Task MainAsync()
   {
-    // I like .env files okay
-    DotNetEnv.Env.Load();
+    // Get the directory of the executable
+    DotNetEnv.Env.TraversePath().Load();
 
     XiJinpingBot bot = new();
 
