@@ -34,5 +34,6 @@ public class XiJinpingBot : DiscordSocketClient
   private async Task OnReady()
   {
     Console.WriteLine($"Xi Jinping Bot is logged in as {CurrentUser.Username}#{CurrentUser.Discriminator}");
+    await SetActivityAsync(new Game($"with {Guilds.Count} Chinese econom{(Guilds.Count == 1 ? "y" : "ies")}"));
   }
 }
