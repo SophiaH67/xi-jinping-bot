@@ -15,27 +15,27 @@ public class TargetExtractor
 
     if (message.Reference != null)
     {
-      var messageId = message.Reference.MessageId;
+      Optional<ulong> messageId = message.Reference.MessageId;
       if (messageId.IsSpecified == false)
       {
         return null;
       }
 
-      var repliedMessage = await message.Channel.GetMessageAsync(messageId.Value);
+      IMessage repliedMessage = await message.Channel.GetMessageAsync(messageId.Value);
       return repliedMessage.Author.Id.ToString();
     };
 
     // Get the previous message
-    var messagesEnumerable = await message.Channel.GetMessagesAsync(limit: 2).FlattenAsync();
+    IEnumerable<IMessage> messagesEnumerable = await message.Channel.GetMessagesAsync(limit: 2).FlattenAsync();
     // Convert the IAsyncEnumerable<IMessage> to a List<IMessage>
-    var messages = messagesEnumerable.ToList();
+    List<IMessage> messages = messagesEnumerable.ToList();
 
     if (messages.Count < 2)
     {
       return null;
     }
 
-    var previousMessage = messages[1];
+    IMessage? previousMessage = messages[1];
     if (previousMessage.Author.Id == message.Author.Id)
     {
       return null;
