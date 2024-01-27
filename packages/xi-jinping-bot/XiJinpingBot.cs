@@ -35,7 +35,7 @@ public class XiJinpingBot : DiscordSocketClient
 
     if (response.IsSuccessStatusCode == false)
     {
-      throw new Exception($"Failed to send message to backend: {response.StatusCode} {await response.Content.ReadAsStringAsync()}");
+      throw new FailedToSendMessageException(response.StatusCode, await response.Content.ReadAsStringAsync());
     }
 
     string responseJson = await response.Content.ReadAsStringAsync();
