@@ -13,6 +13,7 @@ public class XiJinpingBot : DiscordSocketClient
     _backend = new Backend(new HttpClient());
 
     MessageReceived += HandleMessage;
+    Ready += OnReady;
   }
 
   private async Task HandleMessage(SocketMessage message)
@@ -30,4 +31,8 @@ public class XiJinpingBot : DiscordSocketClient
     }
   }
 
+  private async Task OnReady()
+  {
+    Console.WriteLine("Xi Jinping Bot is ready!");
+  }
 }
