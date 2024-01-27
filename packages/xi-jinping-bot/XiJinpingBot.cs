@@ -43,7 +43,7 @@ public class XiJinpingBot : DiscordSocketClient
 
     if (responseDto?.Messages == null)
     {
-      throw new Exception($"Failed to deserialize response from backend: {responseJson}");
+      throw new FailedToDeserializeException(responseJson);
     }
 
     return responseDto.Messages;
