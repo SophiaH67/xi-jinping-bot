@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "packages", "packages", "{3F7854F6-F9F7-4784-8910-A8B7C7AAA832}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xi-jinping-bot", "packages\xi-jinping-bot\xi-jinping-bot.csproj", "{09BE6FCC-14CA-4EB8-BE83-E42D5DB93427}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{09BE6FCC-14CA-4EB8-BE83-E42D5DB93427}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09BE6FCC-14CA-4EB8-BE83-E42D5DB93427}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09BE6FCC-14CA-4EB8-BE83-E42D5DB93427}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09BE6FCC-14CA-4EB8-BE83-E42D5DB93427}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{09BE6FCC-14CA-4EB8-BE83-E42D5DB93427} = {3F7854F6-F9F7-4784-8910-A8B7C7AAA832}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BA840FC8-79DE-4D75-8142-A0B69238C53C}
+	EndGlobalSection
+EndGlobal

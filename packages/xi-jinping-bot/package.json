@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "build": "dotnet build",
+    "start:dev": "dotnet watch run"
+  },
+  "name": "xi-jinping-bot",
+  "version": "1.0.0"
+}
