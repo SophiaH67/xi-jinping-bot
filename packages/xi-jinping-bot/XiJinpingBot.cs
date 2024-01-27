@@ -33,6 +33,6 @@ public class XiJinpingBot : DiscordSocketClient
 
   private async Task OnReady()
   {
-    Console.WriteLine("Xi Jinping Bot is ready!");
+    Console.WriteLine($"Xi Jinping Bot is logged in as {CurrentUser.Username}#{CurrentUser.Discriminator}");
   }
 }
