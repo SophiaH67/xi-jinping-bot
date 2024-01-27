@@ -10,18 +10,12 @@ public class XiJinpingBot : DiscordSocketClient
     GatewayIntents = GatewayIntents.Guilds | GatewayIntents.GuildMessages | GatewayIntents.MessageContent | GatewayIntents.DirectMessages,
   })
   {
-    Log += LogF;
-    MessageReceived += MessageReceivedF;
     _backend = new Backend(new HttpClient());
+
+    MessageReceived += HandleMessage;
   }
 
-  private Task LogF(LogMessage msg)
-  {
-    Console.WriteLine(msg.ToString());
-    return Task.CompletedTask;
-  }
-
-  private async Task MessageReceivedF(SocketMessage message)
+  private async Task HandleMessage(SocketMessage message)
   {
     if (message.Author.Id == CurrentUser.Id)
     {
