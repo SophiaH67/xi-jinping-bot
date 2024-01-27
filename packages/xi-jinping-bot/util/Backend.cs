@@ -5,10 +5,12 @@ using Newtonsoft.Json;
 public class Backend
 {
   private readonly HttpClient _httpClient;
+  private readonly string _backendUrl;
 
   public Backend(HttpClient httpClient)
   {
     _httpClient = httpClient;
+    _backendUrl = Environment.GetEnvironmentVariable("BACKEND_URL") ?? "http://localhost:3000";
   }
 
   /// <summary>
@@ -22,7 +24,7 @@ public class Backend
   {
     XiJinpingMessageDto dto = await XiJinpingMessageDto.FromMessage(message);
 
-    HttpRequestMessage request = new(HttpMethod.Post, "http://localhost:3000/check");
+    HttpRequestMessage request = new(HttpMethod.Post, $"{_backendUrl}/check");
 
     request.Content = new StringContent(JsonConvert.SerializeObject(dto));
     request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
