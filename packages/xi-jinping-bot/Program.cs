@@ -3,9 +3,7 @@ using Discord;
 
 public class Program
 {
-  public static Task Main(string[] args) => new Program().MainAsync();
-
-  public async Task MainAsync()
+  public static async Task Main(string[] args)
   {
     // Load in .env files if they exist
     DotNetEnv.Env.TraversePath().Load();
