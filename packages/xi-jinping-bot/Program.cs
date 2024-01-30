@@ -7,7 +7,7 @@ public class Program
 
   public async Task MainAsync()
   {
-    // Get the directory of the executable
+    // Load in .env files if they exist
     DotNetEnv.Env.TraversePath().Load();
 
     XiJinpingBot bot = new();
