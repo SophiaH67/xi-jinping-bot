@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-public interface IXiJinpingResponseDto
+public class XiJinpingResponseDto
 {
   [JsonProperty(PropertyName = "messages")]
   public string[] Messages { get; set; }
