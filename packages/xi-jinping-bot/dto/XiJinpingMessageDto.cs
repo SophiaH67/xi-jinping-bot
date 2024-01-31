@@ -4,22 +4,22 @@ using Newtonsoft.Json;
 class XiJinpingMessageDto
 {
   [JsonProperty(PropertyName = "citizenID")]
-  public string CitizenID { get; set; }
+  public string CitizenID { get; set; } = string.Empty;
 
   [JsonProperty(PropertyName = "citizenUsername")]
-  public string CitizenUsername { get; set; }
+  public string CitizenUsername { get; set; } = string.Empty;
 
   [JsonProperty(PropertyName = "guild")]
   public XiJinpingGuildDto? Guild { get; set; }
 
   [JsonProperty(PropertyName = "message")]
-  public string Message { get; set; }
+  public string Message { get; set; } = string.Empty;
 
   [JsonProperty(PropertyName = "targetCitizenID")]
   public string? TargetCitizenID { get; set; }
 
   [JsonProperty(PropertyName = "mentionedIDs")]
-  public string[] MentionedIDs { get; set; }
+  public string[] MentionedIDs { get; set; } = [];
 
 
   public static async Task<XiJinpingMessageDto> FromMessage(SocketMessage message)
