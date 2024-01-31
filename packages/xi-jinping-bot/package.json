@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "build": "dotnet build",
+    "start:dev": "nodemon --ext \"cs\" --exec \"dotnet run\""
+  },
+  "name": "xi-jinping-bot",
+  "version": "1.0.0"
+}
