@@ -14,6 +14,7 @@ public class XiJinpingBot : DiscordSocketClient
 
     MessageReceived += HandleMessage;
     Ready += OnReady;
+    Log += DiscordLog;
   }
 
   private async Task HandleMessage(SocketMessage message)
@@ -35,5 +36,11 @@ public class XiJinpingBot : DiscordSocketClient
   {
     Console.WriteLine($"Xi Jinping Bot is logged in as {CurrentUser.Username}#{CurrentUser.Discriminator}");
     await SetActivityAsync(new Game($"with {Guilds.Count} Chinese econom{(Guilds.Count == 1 ? "y" : "ies")}"));
+  }
+
+  private async Task DiscordLog(LogMessage message)
+  {
+    Console.WriteLine(message.ToString());
+    await Task.CompletedTask;
   }
 }
