@@ -37,7 +37,7 @@ public class Backend
     }
 
     string responseJson = await response.Content.ReadAsStringAsync();
-    XiJinpingResponseDto? responseDto = JsonConvert.DeserializeObject<XiJinpingResponseDto>(responseJson);
+    IXiJinpingResponseDto? responseDto = JsonConvert.DeserializeObject<IXiJinpingResponseDto>(responseJson);
 
     if (responseDto?.Messages == null)
     {
