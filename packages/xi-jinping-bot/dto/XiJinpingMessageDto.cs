@@ -21,6 +21,23 @@ class XiJinpingMessageDto
   [JsonProperty(PropertyName = "mentionedIDs")]
   public string[] MentionedIDs { get; set; }
 
+  private XiJinpingMessageDto(
+    string citizenID,
+    string citizenUsername,
+    XiJinpingGuildDto? guild,
+    string message,
+    string? targetCitizenID,
+    string[] mentionedIDs
+  )
+  {
+    CitizenID = citizenID;
+    CitizenUsername = citizenUsername;
+    Guild = guild;
+    Message = message;
+    TargetCitizenID = targetCitizenID;
+    MentionedIDs = mentionedIDs;
+  }
+
 
   public static async Task<XiJinpingMessageDto> FromMessage(SocketMessage message)
   {
@@ -30,22 +47,17 @@ class XiJinpingMessageDto
     XiJinpingGuildDto? guild = null;
     if (message.Channel is SocketGuildChannel channel)
     {
-      guild = new XiJinpingGuildDto
-      {
-        ID = channel.Guild.Id.ToString(),
-        Name = channel.Guild.Name,
-      };
+      guild = new XiJinpingGuildDto(channel.Guild.Id.ToString(), channel.Guild.Name);
     }
 
 
-    return new XiJinpingMessageDto
-    {
-      CitizenID = message.Author.Id.ToString(),
-      CitizenUsername = message.Author.Username,
-      Guild = guild,
-      Message = message.Content,
-      TargetCitizenID = target,
-      MentionedIDs = message.MentionedUsers.Select(user => user.Id.ToString()).ToArray(),
-    };
+    return new XiJinpingMessageDto(
+      message.Author.Id.ToString(),
+      message.Author.Username,
+      guild,
+      message.Content,
+      target,
+      message.MentionedUsers.Select(user => user.Id.ToString()).ToArray()
+    );
   }
 }
