@@ -31,14 +31,17 @@ public class CheckController(CitizenContext context, CheckService checkService) 
             mentionedCitizens = [.. mentionedCitizens, mentionedCitizen];
         }
 
-        (string[], int) result = await checkService.Check(citizen, targetCitizen, mentionedCitizens, request.Guild.Id);
+        var (messages, change) = await checkService.Check(citizen, targetCitizen, mentionedCitizens, request.Guild.Id);
 
-        citizen.SocialCreditScore += result.Item2;
-        await _context.SaveChangesAsync();
+        if (change != 0)
+        {
+            citizen.SocialCreditScore += change;
+            await _context.SaveChangesAsync();
+        }
 
         return new CheckResponseDto
         {
-            Messages = result.Item1
+            Messages = messages
         };
     }
 }
