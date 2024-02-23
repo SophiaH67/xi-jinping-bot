@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "build": "dotnet build",
+    "start:dev": "nodemon --ext \"cs\" --exec \"dotnet run\""
+  },
+  "name": "xi-jinping-backend",
+  "version": "1.0.0"
+}

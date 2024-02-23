@@ -10,4 +10,9 @@ public class FailedToSendMessageException : Exception
     StatusCode = statusCode;
     Input = input;
   }
+
+  public override string ToString()
+  {
+    return $"Failed to send message to backend. Status code: {StatusCode}. Input: {Input}";
+  }
 }

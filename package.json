@@ -6,13 +6,15 @@
   "author": "Sophia Hage <sophia@sophiah.gay>",
   "license": "MIT",
   "devDependencies": {
-    "lerna": "^8.0.1"
+    "lerna": "^8.0.1",
+    "nodemon": "^3.1.0"
   },
   "workspaces": [
     "packages/*"
   ],
   "private": true,
   "scripts": {
-    "start:dev": "lerna run start:dev --stream"
+    "start:dev": "lerna run start:dev --stream",
+    "start:deps": "docker run -d -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=xi -e MONGO_INITDB_ROOT_PASSWORD=jinping mongo"
   }
 }
