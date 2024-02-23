@@ -20,4 +20,21 @@ public class CitizenContext : DbContext
     base.OnModelCreating(modelBuilder);
     modelBuilder.Entity<CitizenItem>().ToCollection("users");
   }
+
+  public async Task<CitizenItem> FindOrCreate(string discordId, string username)
+  {
+    var user = await CitizenItems.FirstOrDefaultAsync(x => x.DiscordId == discordId);
+
+    if (user == null)
+    {
+      user = new CitizenItem
+      {
+        DiscordId = discordId,
+        Username = username
+      };
+      CitizenItems.Add(user);
+      SaveChanges();
+    }
+    return user;
+  }
 }
