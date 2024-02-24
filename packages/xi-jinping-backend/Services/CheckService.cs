@@ -6,7 +6,7 @@ namespace xi_jinping_backend.Services;
 
 public class CheckService
 {
-  private Rule[] rules = [
+  private readonly Rule[] rules = [
     new TestRule()
   ];
 
