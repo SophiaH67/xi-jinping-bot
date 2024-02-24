@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using xi_jinping_backend.Dto;
 using xi_jinping_backend.Models;
 using xi_jinping_backend.Services;
+using xi_jinping_backend.Utils;
 
 namespace xi_jinping_backend.Controllers;
 
@@ -31,7 +32,9 @@ public class CheckController(CitizenContext context, CheckService checkService) 
             mentionedCitizens = [.. mentionedCitizens, mentionedCitizen];
         }
 
-        var (messages, change) = await checkService.Check(citizen, targetCitizen, mentionedCitizens, request.Guild.Id);
+        RuleArgs ruleArgs = new(citizen, targetCitizen, mentionedCitizens, request.Guild.Id);
+
+        var (messages, change) = await checkService.Check(ruleArgs);
 
         if (change != 0)
         {

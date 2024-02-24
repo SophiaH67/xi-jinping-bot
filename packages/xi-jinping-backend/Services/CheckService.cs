@@ -10,14 +10,14 @@ public class CheckService
     new ConsequencesRule()
   ];
 
-  public async Task<(string[], int)> Check(CitizenItem citizen, CitizenItem? targetCitizen, CitizenItem[] mentionedCitizens, string guildId)
+  public async Task<(string[], int)> Check(RuleArgs ruleArgs)
   {
     string[] messages = [];
     int score = 0;
 
     foreach (Rule rule in rules)
     {
-      (string[] ruleMessages, int ruleScore) = await rule.Check(new RuleArgs(citizen, targetCitizen, mentionedCitizens, guildId));
+      (string[] ruleMessages, int ruleScore) = await rule.Check(ruleArgs);
       messages = [.. messages, .. ruleMessages];
       score += ruleScore;
     }
