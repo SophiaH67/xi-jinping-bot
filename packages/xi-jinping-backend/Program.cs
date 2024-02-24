@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using xi_jinping_backend.Models;
+using xi_jinping_backend.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,8 @@ builder.Services.AddDbContext<CitizenContext>(opt => opt.UseMongoDB(builder.Conf
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<CheckService>();
 
 var app = builder.Build();
 
