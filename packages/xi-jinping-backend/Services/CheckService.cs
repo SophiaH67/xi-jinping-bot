@@ -7,7 +7,7 @@ namespace xi_jinping_backend.Services;
 public class CheckService
 {
   private readonly Rule[] rules = [
-    new TestRule()
+    new ConsequencesRule()
   ];
 
   public async Task<(string[], int)> Check(CitizenItem citizen, CitizenItem? targetCitizen, CitizenItem[] mentionedCitizens, string guildId)
