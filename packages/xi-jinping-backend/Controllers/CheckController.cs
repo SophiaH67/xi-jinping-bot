@@ -32,7 +32,7 @@ public class CheckController(CitizenContext context, CheckService checkService) 
             mentionedCitizens = [.. mentionedCitizens, mentionedCitizen];
         }
 
-        RuleArgs ruleArgs = new(citizen, targetCitizen, mentionedCitizens, request.Guild.Id);
+        RuleArgs ruleArgs = new(citizen, targetCitizen, mentionedCitizens, request.Guild.Id, request.Message);
 
         var (messages, change) = await checkService.Check(ruleArgs);
 

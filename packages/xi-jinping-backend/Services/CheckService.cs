@@ -7,7 +7,8 @@ namespace xi_jinping_backend.Services;
 public class CheckService
 {
   private readonly Rule[] rules = [
-    new ConsequencesRule()
+    new ConsequencesRule(),
+    new GoodChinaRule()
   ];
 
   public async Task<(string[], int)> Check(RuleArgs ruleArgs)

@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Catalyst" Version="1.0.44557" />
+    <PackageReference Include="Catalyst.Models.English" Version="1.0.30952" />
     <PackageReference Include="MongoDB.EntityFrameworkCore" Version="7.0.0-preview.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
