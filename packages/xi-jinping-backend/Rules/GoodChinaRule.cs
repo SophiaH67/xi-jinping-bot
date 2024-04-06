@@ -105,8 +105,52 @@ public class GoodChinaRule : Rule
     return (Vibe.POSITIVE, 1.0);
   }
 
+  private readonly string[] PositiveThings = [
+    "ccp",
+    "china",
+    "xi",
+    "jinping",
+    "communis",
+    "huawei",
+    "tencent",
+    "discord",
+    "genshin",
+    "honkai",
+    "blizzard",
+    "supercell",
+    "wechat",
+    "bing chilling",
+    "bingchilling",
+    "bīngqílín",
+    "bingqilin",
+    "binqilin",
+    "bingilin",
+  ];
+  private readonly string[] NegativeThings = [
+    "taiwan",
+    "hong kong",
+    "tibet",
+    "xinjiang",
+    "falun gong",
+    "falungong",
+    "falun",
+    "gong",
+    "tiananmen",
+    "square",
+  ];
+
   private Vibe GetNounVibe(string noun)
   {
+    if (PositiveThings.Contains(noun))
+    {
+      return Vibe.POSITIVE;
+    }
+
+    if (NegativeThings.Contains(noun))
+    {
+      return Vibe.NEGATIVE;
+    }
+
     return Vibe.NEUTRAL;
   }
 }
