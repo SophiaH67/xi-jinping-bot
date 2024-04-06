@@ -1,6 +1,7 @@
 using Catalyst;
 using Mosaik.Core;
 using xi_jinping_backend.Utils;
+using SentimentAnalyzer;
 
 namespace xi_jinping_backend.Rules;
 
@@ -35,14 +36,14 @@ public class GoodChinaRule : Rule
     {
       TokenData firstToken = sentenceTokenList.First();
       TokenData lastToken = sentenceTokenList.Last();
-      string sentence = args.message.Substring(firstToken.LowerBound, lastToken.UpperBound - firstToken.LowerBound);
+      string sentence = args.message.Substring(firstToken.LowerBound, lastToken.UpperBound - firstToken.LowerBound + 1);
       var (vibe, intensity) = VibeCheck(sentence);
 
       foreach (TokenData token in sentenceTokenList)
       {
         if (token.Tag == PartOfSpeech.NOUN)
         {
-          var noun = args.message.Substring(token.LowerBound, token.UpperBound - token.LowerBound);
+          var noun = args.message.Substring(token.LowerBound, token.UpperBound - token.LowerBound + 1);
           Vibe nounVibe = GetNounVibe(noun);
 
           Vibe overallVibe;
@@ -102,7 +103,12 @@ public class GoodChinaRule : Rule
 
   private (Vibe, double) VibeCheck(string sentence)
   {
-    return (Vibe.POSITIVE, 1.0);
+    var sentiment = Sentiments.Predict(sentence);
+
+    // If not much confidence, it's neutral
+    if (sentiment.Score < 0.25) return (Vibe.NEUTRAL, 0);
+
+    return (sentiment.Prediction ? Vibe.POSITIVE : Vibe.NEGATIVE, sentiment.Score);
   }
 
   private readonly string[] PositiveThings = [
