@@ -28,7 +28,16 @@ public class XiJinpingBot : DiscordSocketClient
 
     foreach (string messageToSend in messages)
     {
-      await message.Channel.SendMessageAsync(messageToSend);
+      try
+      {
+        await message.Channel.SendMessageAsync(messageToSend);
+      }
+      catch
+      {
+        // I would log something, but last time it logged anything (the exception)
+        // it filled up my 512GiB disk entirely with error logs. I do not want this
+        // to happen again, so I'm just going to ignore it. 🚀
+      }
     }
   }
 
